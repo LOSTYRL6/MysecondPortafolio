@@ -1,30 +1,66 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue";
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="ContainerPortafolio">
+    <div class="contenedorDelMenu" v-if="IniciarSesion">
+      <div class="cubo"></div>
+      <button @click="cerrarMenu"></button>
+    </div>
+    <div v-else>Hola</div>
+    <img src="/public/window.jpg" alt="" />
   </div>
-  <HelloWorld msg="Vite + Vue" />
+  <!-- <HelloWorld msg="Vite + Vue" /> -->
 </template>
+<script>
+export default {
+  data() {
+    return {
+      IniciarSesion: true,
+    };
+  },
+  methods: {
+    cerrarMenu() {
+      this.IniciarSesion = false;
+    },
+  },
+};
+</script>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.ContainerPortafolio {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.contenedorDelMenu {
+  width: 300px;
+  height: auto;
+  min-height: 200px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.cubo {
+  width: 50px;
+  height: 50px;
+  border: solid black 1px;
+  margin-bottom: 5px;
+}
+button {
+  width: 100px;
+  height: 25px;
+}
+.ContainerPortafolio img {
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  position: absolute;
 }
 </style>
