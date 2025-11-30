@@ -52,7 +52,7 @@ import Aplicaciones from "./components/Aplicaciones.vue";
               @toggle="toggleVentana"
               @cerrar="cerrarVentana"
             >
-              <p>Contenido de {{ ventana.Nombre }}</p>
+              <component :is="ventana.componente" />
             </ventana>
           </div>
         </section>
@@ -108,16 +108,19 @@ export default {
           Nombre: "Chrome",
           id: "Chrome",
           imagenes: "./cromo.png",
+          componente: "ChromeVentana",
         },
         {
           Nombre: "Opciones",
           id: "Opciones",
           imagenes: "./pc.png",
+          componente: "OpcionesVentana",
         },
         {
           Nombre: "Curriculum",
           id: "Curriculum",
           imagenes: "./pdf.png",
+          componente: "CurriculumVentana",
         },
       ],
       ventanasAbiertas: [], // <-- Aquí
@@ -243,6 +246,7 @@ export default {
   align-items: center;
   flex-direction: column;
   position: relative;
+  overflow: hidden;
 }
 
 .Pantallanegra {
@@ -259,6 +263,7 @@ export default {
   top: 0;
   left: 0;
   z-index: 1;
+  overflow: hidden;
 }
 .PantallaPrincipalFoto {
   width: 100%;
@@ -300,6 +305,7 @@ export default {
 }
 .HotbarIconoVentana {
   width: 50px;
+  height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -447,7 +453,7 @@ button {
   align-items: center;
 }
 .HotbarVentanas img {
-  width: 40px;
-  height: 40px;
+  width: 70%;
+  height: 90%;
 }
 </style>

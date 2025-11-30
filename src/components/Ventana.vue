@@ -32,8 +32,8 @@ export default {
       estaMaximizado: false,
       prevX: 0,
       prevY: 0,
-      posX: 50,
-      posY: 50,
+      posX: 100,
+      posY: 100,
       offsetX: 0,
       offsetY: 0,
       arrastrando: false,
@@ -72,8 +72,14 @@ export default {
 
       if (!this.raf) {
         this.raf = requestAnimationFrame(() => {
-          this.posX = e.clientX - this.offsetX;
-          this.posY = e.clientY - this.offsetY;
+          let nuevaX = e.clientX - this.offsetX;
+          let nuevaY = e.clientY - this.offsetY;
+
+          const maxX = window.innerWidth - this.$el.offsetWidth - 10;
+          const maxY = window.innerHeight - this.$el.offsetHeight - 47.5;
+          this.posX = Math.min(Math.max(nuevaX, 0), maxX);
+          this.posY = Math.min(Math.max(nuevaY, 0), maxY);
+
           this.raf = null;
         });
       }
@@ -91,46 +97,85 @@ export default {
 <style scoped>
 .Ventana {
   position: absolute;
-  top: 50px;
-  left: 50px;
   width: 300px;
-  height: 200px;
-  background: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  height: 300px;
   display: flex;
   flex-direction: column;
-  transition: all 0.3s ease;
-  border-radius: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.25s ease;
+
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.399) 0%,
+    rgba(240, 248, 255, 0.468) 40%,
+    rgba(225, 235, 250, 0.232) 100%
+  );
+
+  border: 1px solid rgba(180, 190, 210, 0.9);
+  box-shadow: 0 0 9px rgba(0, 0, 0, 0.45),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
 }
 
 .Ventana.maximizado {
   width: 100%;
   height: 100%;
-  position: absolute;
+  border-radius: 0;
 }
 
 .BarraTitulo {
-  background: #333;
-  color: white;
+  height: 27px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5px;
+  padding: 0 6px;
   cursor: move;
-  user-select: none; /* evita seleccionar texto al arrastrar */
-  border-radius: 20px 20px;
+  user-select: none;
+
+  background: linear-gradient(to bottom, #e3eefc 0%, #c2d7f3 45%, #9ebde4 100%);
+
+  color: #1b3557;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.75);
 }
 
 .BarraTitulo .Botones button {
-  background: transparent;
   border: none;
-  color: white;
-  margin-left: 5px;
+  height: 100%;
   cursor: pointer;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 0 8px;
+}
+
+.BarraTitulo .Botones button:nth-child(1) {
+  background: linear-gradient(#fafafa, #dcdcdc);
+}
+
+.BarraTitulo .Botones button:nth-child(2) {
+  background: linear-gradient(#fafafa, #dcdcdc);
+}
+
+.BarraTitulo .Botones button:nth-child(3) {
+  background: linear-gradient(#ff7a7a, #dd3c3c);
+  color: white;
 }
 
 .Contenido {
   flex: 1;
-  padding: 10px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  background: #fffffff2;
+  overflow: auto;
+  align-items: center;
+  margin: 7px;
+  border-radius: 5px;
+}
+.Botones button {
+  margin: 0.5px;
+}
+.Botones button:nth-child(3) {
+  width: 50px;
 }
 </style>
