@@ -45,7 +45,7 @@ export default {
         this.anchoVentana = entry.contentRect.width;
 
         // Ajustar el logo
-        if (this.anchoVentana < 300) {
+        if (this.anchoVentana < 500) {
           this.logoWidth = "60%";
           this.logoheight = "100px";
           this.botonWidth = "80%";

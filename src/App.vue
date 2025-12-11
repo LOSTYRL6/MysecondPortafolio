@@ -122,6 +122,30 @@ export default {
           imagenes: "./pdf.png",
           componente: "CurriculumVentana",
         },
+        {
+          Nombre: "Conocimientos",
+          id: "Conocimientos",
+          imagenes: "./liderazgo-intelectual.png",
+          componente: "ConocimientosVentana",
+        },
+        {
+          Nombre: "Estudios",
+          id: "Estudios",
+          imagenes: "./libro.png",
+          componente: "EstudiosVentana",
+        },
+        {
+          Nombre: "Experiencias",
+          id: "Experiencias",
+          imagenes: "./maletin.png",
+          componente: "ExperienciasVentana",
+        },
+        {
+          Nombre: "Proyecto",
+          id: "Proyecto",
+          imagenes: "./briefing.png",
+          componente: "ProyectoVentana",
+        },
       ],
       ventanasAbiertas: [], // <-- Aquí
     };

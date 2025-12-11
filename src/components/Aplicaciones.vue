@@ -23,10 +23,11 @@ export default {
   flex-direction: column;
   width: 70px;
   height: 70px;
-  margin: 10px;
+  margin: 20px;
 }
 p {
   color: white;
+  font-size: 15px;
 }
 .Aplicaciones img {
   width: 80%;

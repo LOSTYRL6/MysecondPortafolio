@@ -1,90 +1,83 @@
 <template>
   <div class="OpcionesaEscoger">
+    <!-- Pestaña 1 -->
     <div
       class="Opciones"
-      :class="{ activa: PestanaInfomacion }"
+      :class="{ activa: PestanaFrontend }"
       @click="PrimeraPestana"
     >
       <img
         src="../../../public/informacion.png"
-        :style="{
-          width: logoWidth,
-          height: logoheight,
-        }"
+        :style="{ width: logoWidth, height: logoheight }"
         alt=""
       />
-      <h1 v-show="MostrarTitulo">INFORMACION</h1>
+      <h1 v-show="MostrarTitulo">Front End</h1>
     </div>
 
+    <!-- Pestaña 2 -->
     <div
       class="Opciones"
-      :class="{ activa: PestanaEstilo }"
+      :class="{ activa: PestanaBackend }"
       @click="SegundaPestana"
     >
       <img
         src="../../../public/navegador-web.png"
-        :style="{
-          width: logoWidth,
-          height: logoheight,
-        }"
+        :style="{ width: logoWidth, height: logoheight }"
         alt=""
       />
-      <h1 v-show="MostrarTitulo">ESTILO</h1>
+      <h1 v-show="MostrarTitulo">Back end</h1>
+    </div>
+
+    <!-- Pestaña 3 -->
+    <div
+      class="Opciones"
+      :class="{ activa: PestanaDB }"
+      @click="TerceraPestana"
+    >
+      <img
+        src="../../../public/navegador-web.png"
+        :style="{ width: logoWidth, height: logoheight }"
+        alt=""
+      />
+      <h1 v-show="MostrarTitulo">Database</h1>
+    </div>
+
+    <!-- Pestaña 4 (Nueva) -->
+    <div
+      class="Opciones"
+      :class="{ activa: PestanaOther }"
+      @click="CuartaPestana"
+    >
+      <img
+        src="../../../public/vue.png"
+        :style="{ width: logoWidth, height: logoheight }"
+        alt=""
+      />
+      <h1 v-show="MostrarTitulo">Other</h1>
     </div>
   </div>
 
   <div class="OpcionSelecionado" ref="contenedor">
-    <div class="contenido info" v-show="PestanaInfomacion" ref="info">
-      <div class="as">
-        <h1>Sobre mi</h1>
-      </div>
-      <div class="as2">
-        <section class="info-grid">
-          <div class="info-item">
-            <span class="info-title">Versión:</span>
-            <span class="info-value">1.0.0</span>
-          </div>
-          <div class="info-item">
-            <span class="info-title">Fecha de compilación:</span>
-            <span class="info-value">01/12/2025</span>
-          </div>
-          <div class="info-item">
-            <span class="info-title">Creado por:</span>
-            <span class="info-value">Pablo Lin</span>
-          </div>
-          <div class="info-item">
-            <span class="info-title">GitHub:</span>
-            <span class="info-value"
-              ><a
-                href="https://github.com/LOSTYRL6/MysecondPortafolio"
-                target="_blank"
-                >Portafolio Github</a
-              ></span
-            >
-          </div>
-        </section>
-      </div>
-      <div class="as">
-        <h1>Dessarollado con</h1>
-      </div>
-      <div class="as2">
-        <div class="CajonesIconos">
-          <img src="../../../public/vue.png" alt="" />
-          <h4>Vue 3</h4>
-        </div>
-        <div class="CajonesIconos">
-          <img src="../../../public/vite.png" alt="" />
-          <h4>Vite</h4>
-        </div>
-        <div class="CajonesIconos">
-          <img src="../../../public/gsap.png" alt="" />
-          <h4>GSAP</h4>
-        </div>
-      </div>
-    </div>
-    <div class="contenido estilo" v-show="PestanaEstilo" ref="estilo">
+    <!-- Contenido 1 -->
+    <div class="contenido info" v-show="PestanaFrontend" ref="info"></div>
+
+    <!-- Contenido 2 -->
+    <div class="contenido estilo" v-show="PestanaBackend" ref="estilo">
       <img src="../../../public/gifgif.gif" alt="" />
       <h1>En Construccion</h1>
+    </div>
+
+    <!-- Contenido 3 -->
+    <div class="contenido A" v-show="PestanaDB" ref="A"></div>
+
+    <!-- Contenido 4 (nuevo) -->
+    <div class="contenido B" v-show="PestanaOther" ref="B">
+      <img
+        src="https://media.tenor.com/h3xXlFchdbEAAAAC/thumbs-up-tboi.gif"
+        alt="Thumbs Up Tboi"
+        style="width: 100%; max-width: 300px"
+      />
+      <h1>En Construcción</h1>
     </div>
   </div>
 </template>
@@ -96,19 +89,25 @@ export default {
   name: "OpcionesVentana",
   data() {
     return {
-      PestanaInfomacion: true,
-      PestanaEstilo: false,
+      // ESTADOS DE LAS 4 PESTAÑAS
+      PestanaFrontend: true,
+      PestanaBackend: false,
+      PestanaDB: false,
+      PestanaOther: false,
+
+      // RESPONSIVE
       MostrarTitulo: true,
       logoheight: "45px",
       logoWidth: "45px",
     };
   },
+
   mounted() {
     const ro = new ResizeObserver((entries) => {
       for (let entry of entries) {
-        this.anchoVentana = entry.contentRect.width;
+        const ancho = entry.contentRect.width;
 
-        if (this.anchoVentana < 500) {
+        if (ancho < 500) {
           this.logoheight = "27px";
           this.logoWidth = "27px";
           this.MostrarTitulo = false;
@@ -122,41 +121,56 @@ export default {
 
     ro.observe(this.$el.parentElement);
   },
+
   methods: {
+    // --- MÉTODOS DE PESTAÑAS ---
+
     PrimeraPestana() {
-      if (this.PestanaInfomacion) return;
+      if (this.PestanaFrontend) return;
       this.animarCambio("info");
     },
 
     SegundaPestana() {
-      if (this.PestanaEstilo) return;
+      if (this.PestanaBackend) return;
       this.animarCambio("estilo");
     },
 
+    TerceraPestana() {
+      if (this.PestanaDB) return;
+      this.animarCambio("A");
+    },
+
+    CuartaPestana() {
+      if (this.PestanaOther) return;
+      this.animarCambio("B");
+    },
+
+    // --- ANIMACIÓN GSAP ---
     animarCambio(nueva) {
-      const actual = this.PestanaInfomacion ? "info" : "estilo";
+      // Detectar cuál pestaña está activa actualmente
+      let actual = "info";
+      if (this.PestanaBackend) actual = "estilo";
+      if (this.PestanaDB) actual = "A";
+      if (this.PestanaOther) actual = "B";
 
-      const salida = actual === "info" ? this.$refs.info : this.$refs.estilo;
-      const entrada = nueva === "info" ? this.$refs.info : this.$refs.estilo;
+      const salida = this.$refs[actual];
+      const entrada = this.$refs[nueva];
 
-      let salidaY, entradaY;
-
-      if (actual === "info" && nueva === "estilo") {
-        salidaY = -100;
-        entradaY = 100;
-      } else {
-        salidaY = 100;
-        entradaY = -100;
-      }
+      const salidaY = -100;
+      const entradaY = 100;
 
       gsap.to(salida, {
         y: salidaY,
         opacity: 0,
         duration: 0.25,
         onComplete: () => {
-          this.PestanaInfomacion = nueva === "info";
-          this.PestanaEstilo = nueva === "estilo";
+          // ACTUALIZAR ESTADOS
+          this.PestanaFrontend = nueva === "info";
+          this.PestanaBackend = nueva === "estilo";
+          this.PestanaDB = nueva === "A";
+          this.PestanaOther = nueva === "B";
 
+          // ANIMAR ENTRADA
           gsap.fromTo(
             entrada,
             { y: entradaY, opacity: 0 },
@@ -179,7 +193,7 @@ export default {
 }
 
 .Opciones {
-  width: 50%;
+  width: 25%;
   height: 100%;
   display: flex;
   justify-content: center;

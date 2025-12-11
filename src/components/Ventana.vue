@@ -97,8 +97,8 @@ export default {
 <style scoped>
 .Ventana {
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   border-radius: 6px;
@@ -163,7 +163,6 @@ export default {
 
 .Contenido {
   flex: 1;
-  padding: 6px;
   display: flex;
   flex-direction: column;
   background: #fffffff2;
