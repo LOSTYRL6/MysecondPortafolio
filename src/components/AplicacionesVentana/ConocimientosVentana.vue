@@ -59,34 +59,178 @@
 
   <div class="OpcionSelecionado" ref="contenedor">
     <!-- Contenido 1 -->
-    <div class="contenido info" v-show="PestanaFrontend" ref="info"></div>
+    <div class="contenido info" v-if="PestanaFrontend" ref="info">
+      <Swiper
+        :effect="'cards'"
+        :grabCursor="true"
+        :modules="modules"
+        :style="{ width: cardWidth, height: cardheight }"
+        class="mySwiper"
+      >
+        <swiper-slide v-for="(card, index) in cartas" :key="index">
+          <div :style="{ width: cardWidth, height: cardheight }" class="card">
+            <div class="content">
+              <div class="back">
+                <div class="back-content">
+                  <strong>{{ card.backText }}</strong>
+                </div>
+              </div>
+              <div class="front">
+                <div class="front-content">
+                  <div class="title">
+                    <img :src="card.imagen" alt="" />
+                  </div>
+                  <div class="description">
+                    <h2>{{ card.title }}</h2>
+                    <p
+                      v-for="(DescripcionUnica, a) in card.description"
+                      :key="a"
+                    >
+                      {{ DescripcionUnica }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+      </Swiper>
+    </div>
 
     <!-- Contenido 2 -->
-    <div class="contenido estilo" v-show="PestanaBackend" ref="estilo">
-      <img src="../../../public/gifgif.gif" alt="" />
-      <h1>En Construccion</h1>
+    <div class="contenido estilo" v-if="PestanaBackend" ref="estilo">
+      <Swiper
+        :effect="'cards'"
+        :grabCursor="true"
+        :modules="modules"
+        :style="{ width: cardWidth, height: cardheight }"
+        class="mySwiper"
+      >
+        <swiper-slide v-for="(card, index) in cartas2" :key="index">
+          <div :style="{ width: cardWidth, height: cardheight }" class="card">
+            <div class="content">
+              <div class="back">
+                <div class="back-content">
+                  <strong>{{ card.backText }}</strong>
+                </div>
+              </div>
+              <div class="front">
+                <div class="front-content">
+                  <div class="title">
+                    <img :src="card.imagen" alt="" />
+                  </div>
+                  <div class="description">
+                    <h2>{{ card.title }}</h2>
+                    <p
+                      v-for="(DescripcionUnica, a) in card.description"
+                      :key="a"
+                    >
+                      {{ DescripcionUnica }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+      </Swiper>
     </div>
 
     <!-- Contenido 3 -->
-    <div class="contenido A" v-show="PestanaDB" ref="A"></div>
+    <div class="contenido A" v-if="PestanaDB" ref="A">
+      <Swiper
+        :effect="'cards'"
+        :grabCursor="true"
+        :modules="modules"
+        :style="{ width: cardWidth, height: cardheight }"
+        class="mySwiper"
+      >
+        <swiper-slide v-for="(card, index) in cartas3" :key="index">
+          <div :style="{ width: cardWidth, height: cardheight }" class="card">
+            <div class="content">
+              <div class="back">
+                <div class="back-content">
+                  <strong>{{ card.backText }}</strong>
+                </div>
+              </div>
+              <div class="front">
+                <div class="front-content">
+                  <div class="title">
+                    <img :src="card.imagen" alt="" />
+                  </div>
+                  <div class="description">
+                    <h2>{{ card.title }}</h2>
+                    <p
+                      v-for="(DescripcionUnica, a) in card.description"
+                      :key="a"
+                    >
+                      {{ DescripcionUnica }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+      </Swiper>
+    </div>
 
     <!-- Contenido 4 (nuevo) -->
-    <div class="contenido B" v-show="PestanaOther" ref="B">
-      <img
-        src="https://media.tenor.com/h3xXlFchdbEAAAAC/thumbs-up-tboi.gif"
-        alt="Thumbs Up Tboi"
-        style="width: 100%; max-width: 300px"
-      />
-      <h1>En Construcción</h1>
+    <div class="contenido B" v-if="PestanaOther" ref="B">
+      <Swiper
+        :effect="'cards'"
+        :grabCursor="true"
+        :modules="modules"
+        :style="{ width: cardWidth, height: cardheight }"
+        class="mySwiper"
+      >
+        <swiper-slide v-for="(card, index) in cartas4" :key="index">
+          <div :style="{ width: cardWidth, height: cardheight }" class="card">
+            <div class="content">
+              <div class="back">
+                <div class="back-content">
+                  <strong>{{ card.backText }}</strong>
+                </div>
+              </div>
+              <div class="front">
+                <div class="front-content">
+                  <div class="title">
+                    <img :src="card.imagen" alt="" />
+                  </div>
+                  <div class="description">
+                    <h2>{{ card.title }}</h2>
+                    <p
+                      v-for="(DescripcionUnica, a) in card.description"
+                      :key="a"
+                    >
+                      {{ DescripcionUnica }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+      </Swiper>
     </div>
   </div>
 </template>
 
 <script>
 import gsap from "gsap";
+import { nextTick } from "vue";
+import { Swiper, SwiperSlide } from "swiper/vue";
+
+import "swiper/css";
+import "swiper/css/effect-cards";
+import { EffectCards } from "swiper/modules";
 
 export default {
   name: "OpcionesVentana",
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
   data() {
     return {
       // ESTADOS DE LAS 4 PESTAÑAS
@@ -94,11 +238,154 @@ export default {
       PestanaBackend: false,
       PestanaDB: false,
       PestanaOther: false,
-
-      // RESPONSIVE
+      cardWidth: "230px",
+      cardheight: "350px",
       MostrarTitulo: true,
       logoheight: "45px",
       logoWidth: "45px",
+      modules: [EffectCards],
+      cartas: [
+        {
+          title: "HTML",
+          description: ["- Estructura semántica", "- Buenas prácticas"],
+          backText: "Hover Me 1",
+          imagen: "./html.png",
+        },
+        {
+          title: "CSS",
+          description: ["- Flexbox y Grid", "- Responsive", "- Animaciones"],
+          backText: "Hover Me 2",
+          imagen: "./css.png",
+        },
+        {
+          title: "JavaScripts",
+          description: [
+            "- Manejo de eventos",
+            "- Manipulación del DOM",
+            "- Fetch / Axios",
+          ],
+          backText: "Hover Me 3",
+          imagen: "./js.png",
+        },
+        {
+          title: "Bootstrap",
+          description: [
+            "- Sistema de grid",
+            "- Componentes UI",
+            "- Responsive rápido",
+          ],
+          backText: "Hover Me 4",
+          imagen: "./boot.png",
+        },
+        {
+          title: "SCSS",
+          description: ["- Flexbox y Grid", "- Responsive", "- Animaciones"],
+          backText: "Hover Me 4",
+          imagen: "./scss.png",
+        },
+        {
+          title: "Vue",
+          description: ["- v-if / v-for", "- v-bind", "- Props y emits"],
+          backText: "Hover Me 5",
+          imagen: "./vue.png",
+        },
+        {
+          title: "React",
+          description: [
+            "- useState",
+            "- useEffect",
+            "- Componentes reutilizables",
+          ],
+          backText: "Hover Me 6",
+          imagen: "./react.png",
+        },
+      ],
+
+      cartas2: [
+        {
+          title: "Java",
+          description: ["- Clases y objetos", "- POO", "- Swing"],
+          backText: "Hover Me 1",
+          imagen: "./java.png",
+        },
+        {
+          title: "PHP",
+          description: ["- Conexión a BD", "- Sesion y cookie", "- CRUD"],
+          backText: "Hover Me 2",
+          imagen: "./php.png",
+        },
+        {
+          title: "Eloquent",
+          description: ["- Autenticación", "- Validación", "- Controllers"],
+          backText: "Hover Me 3",
+          imagen: "./laravel.png",
+        },
+        {
+          title: "Node.js",
+          description: ["- Servidor", "- Npm", "- APIs REST"],
+          backText: "Hover Me 4",
+          imagen: "./node.png",
+        },
+      ],
+      cartas3: [
+        {
+          title: "MySQL",
+          description: ["- JOIN", "- Entitat y relacio ", "- Consulta"],
+          backText: "Hover Me 1",
+          imagen: "./mysql.png",
+        },
+        {
+          title: "MongoDB",
+          description: ["- NoSQL básico", "- Consulta basico"],
+          backText: "Hover Me 2",
+          imagen: "./mongo.png",
+        },
+      ],
+
+      cartas4: [
+        {
+          title: "Git",
+          description: ["- Control de versiones", "- Comandos", "- Commits"],
+          backText: "Hover Me 1",
+          imagen: "./git.png",
+        },
+        {
+          title: "Github",
+          description: ["- Branch", "- Repositorio", "- Claves para API"],
+          backText: "Hover Me 2",
+          imagen: "./github.png",
+        },
+        {
+          title: "Wordpress",
+          description: [
+            "- SEO",
+            "- Temas y plugins",
+            "- Personalización básica",
+          ],
+          backText: "Hover Me 3",
+          imagen: "./wordpress.png",
+        },
+        {
+          title: "GSAP",
+          description: [
+            "- Animaciones avanzadas",
+            "- ScrollTrigger",
+            "- Integración con Vue y React",
+          ],
+          backText: "Hover Me 4",
+          imagen: "./gsap.png",
+        },
+        {
+          title: "Swiper",
+          description: [
+            "- Sliders interactivos",
+            "- Carruseles responsive",
+            "- Integración en Vue",
+          ],
+          backText: "Hover Me 5",
+          imagen: "./swiper.png",
+        },
+      ],
     };
   },
 
@@ -110,9 +397,13 @@ export default {
         if (ancho < 500) {
           this.logoheight = "27px";
           this.logoWidth = "27px";
+          this.cardWidth = "170px";
+          this.cardheight = "250px";
           this.MostrarTitulo = false;
         } else {
           this.logoheight = "45px";
+          this.cardWidth = "230px";
+          this.cardheight = "350px";
           this.logoWidth = "45px";
           this.MostrarTitulo = true;
         }
@@ -147,28 +438,30 @@ export default {
 
     // --- ANIMACIÓN GSAP ---
     animarCambio(nueva) {
-      // Detectar cuál pestaña está activa actualmente
       let actual = "info";
       if (this.PestanaBackend) actual = "estilo";
       if (this.PestanaDB) actual = "A";
       if (this.PestanaOther) actual = "B";
 
       const salida = this.$refs[actual];
-      const entrada = this.$refs[nueva];
-
       const salidaY = -100;
-      const entradaY = 100;
 
       gsap.to(salida, {
         y: salidaY,
         opacity: 0,
         duration: 0.25,
-        onComplete: () => {
+        onComplete: async () => {
           // ACTUALIZAR ESTADOS
           this.PestanaFrontend = nueva === "info";
           this.PestanaBackend = nueva === "estilo";
           this.PestanaDB = nueva === "A";
           this.PestanaOther = nueva === "B";
+
+          // Esperar a que Vue actualice el DOM
+          await nextTick();
+
+          const entrada = this.$refs[nueva];
+          const entradaY = 100;
 
           // ANIMAR ENTRADA
           gsap.fromTo(
@@ -176,6 +469,11 @@ export default {
             { y: entradaY, opacity: 0 },
             { y: 0, opacity: 1, duration: 0.25 }
           );
+
+          // Si es Swiper, actualizarlo para que recalcule el tamaño
+          if (nueva === "B" && entrada.swiper) {
+            entrada.swiper.update();
+          }
         },
       });
     },
@@ -230,6 +528,8 @@ export default {
   align-items: center;
   flex-direction: column;
   overflow: auto;
+  justify-content: center;
+  align-items: center;
 }
 .contenido:nth-child(2) {
   justify-content: center;
@@ -303,5 +603,215 @@ export default {
 .as2 img {
   width: 75px;
   height: 75px;
+}
+
+.swiper {
+  width: 230px;
+  height: 350px;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
+/* From Uiverse.io by ElSombrero2 */
+.card {
+  overflow: visible;
+  width: 230px;
+  height: 350px;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 300ms;
+  box-shadow: 0px 0px 10px 1px #000000ee;
+  border-radius: 5px;
+}
+
+.front,
+.back {
+  background-color: #151515;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.back {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.back::before {
+  position: absolute;
+  content: " ";
+  display: block;
+  width: 160px;
+  height: 160%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #24b134,
+    #221bea,
+    #e7ff34,
+    #ff0000,
+    transparent
+  );
+  animation: rotation_481 5000ms infinite linear;
+}
+
+.back-content {
+  position: absolute;
+  width: 95%;
+  height: 95%;
+  background-color: #151515;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.card:hover .content {
+  transform: rotateY(180deg);
+}
+
+@keyframes rotation_481 {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  0% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.front {
+  transform: rotateY(180deg);
+  color: white;
+}
+
+.front .front-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.front-content .badge {
+  background-color: #00000055;
+  padding: 2px 10px;
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+  width: fit-content;
+}
+
+.description {
+  box-shadow: 0px 0px 10px 5px #00000088;
+  width: 100%;
+  height: 50%;
+  background-color: #00ff3c99;
+  backdrop-filter: blur(5px);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.description p {
+  font-size: 15px;
+}
+
+.title {
+  font-size: 11px;
+  max-width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title img {
+  width: 75%;
+  height: 75%;
+}
+
+.title p {
+  width: 50%;
+}
+
+.card-footer {
+  color: #ffffff88;
+  margin-top: 5px;
+  font-size: 8px;
+}
+
+.front .img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: #ffbb66;
+  position: relative;
+  filter: blur(15px);
+  animation: floating 2600ms infinite linear;
+}
+
+#bottom {
+  background-color: #ff8866;
+  left: 50px;
+  top: 0px;
+  width: 150px;
+  height: 150px;
+  animation-delay: -800ms;
+}
+
+#right {
+  background-color: #ff2233;
+  left: 160px;
+  top: -80px;
+  width: 30px;
+  height: 30px;
+  animation-delay: -1800ms;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 </style>
