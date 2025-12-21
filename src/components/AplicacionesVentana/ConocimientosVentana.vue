@@ -7,7 +7,7 @@
       @click="PrimeraPestana"
     >
       <img
-        src="../../../public/informacion.png"
+        src="../../../public/monitor.png"
         :style="{ width: logoWidth, height: logoheight }"
         alt=""
       />
@@ -21,7 +21,7 @@
       @click="SegundaPestana"
     >
       <img
-        src="../../../public/navegador-web.png"
+        src="../../../public/engranajes.png"
         :style="{ width: logoWidth, height: logoheight }"
         alt=""
       />
@@ -35,7 +35,7 @@
       @click="TerceraPestana"
     >
       <img
-        src="../../../public/navegador-web.png"
+        src="../../../public/bd.png"
         :style="{ width: logoWidth, height: logoheight }"
         alt=""
       />
@@ -49,7 +49,7 @@
       @click="CuartaPestana"
     >
       <img
-        src="../../../public/vue.png"
+        src="../../../public/herramientas.png"
         :style="{ width: logoWidth, height: logoheight }"
         alt=""
       />
@@ -72,7 +72,7 @@
             <div class="content">
               <div class="back">
                 <div class="back-content">
-                  <strong>{{ card.backText }}</strong>
+                  <img src="../../../monitor.png" alt="" />
                 </div>
               </div>
               <div class="front">
@@ -81,10 +81,13 @@
                     <img :src="card.imagen" alt="" />
                   </div>
                   <div class="description">
-                    <h2>{{ card.title }}</h2>
+                    <h2 :style="{ fontSize: TituloSize, marginBottom: '5px' }">
+                      {{ card.title }}
+                    </h2>
                     <p
                       v-for="(DescripcionUnica, a) in card.description"
                       :key="a"
+                      :style="{ fontSize: TextSize }"
                     >
                       {{ DescripcionUnica }}
                     </p>
@@ -111,7 +114,7 @@
             <div class="content">
               <div class="back">
                 <div class="back-content">
-                  <strong>{{ card.backText }}</strong>
+                  <img src="../../../engranajes.png" alt="" />
                 </div>
               </div>
               <div class="front">
@@ -120,10 +123,13 @@
                     <img :src="card.imagen" alt="" />
                   </div>
                   <div class="description">
-                    <h2>{{ card.title }}</h2>
+                    <h2 :style="{ fontSize: TituloSize, marginBottom: '5px' }">
+                      {{ card.title }}
+                    </h2>
                     <p
                       v-for="(DescripcionUnica, a) in card.description"
                       :key="a"
+                      :style="{ fontSize: TextSize }"
                     >
                       {{ DescripcionUnica }}
                     </p>
@@ -150,7 +156,7 @@
             <div class="content">
               <div class="back">
                 <div class="back-content">
-                  <strong>{{ card.backText }}</strong>
+                  <img src="../../../bd.png" alt="" />
                 </div>
               </div>
               <div class="front">
@@ -159,10 +165,13 @@
                     <img :src="card.imagen" alt="" />
                   </div>
                   <div class="description">
-                    <h2>{{ card.title }}</h2>
+                    <h2 :style="{ fontSize: TituloSize, marginBottom: '5px' }">
+                      {{ card.title }}
+                    </h2>
                     <p
                       v-for="(DescripcionUnica, a) in card.description"
                       :key="a"
+                      :style="{ fontSize: TextSize }"
                     >
                       {{ DescripcionUnica }}
                     </p>
@@ -189,7 +198,7 @@
             <div class="content">
               <div class="back">
                 <div class="back-content">
-                  <strong>{{ card.backText }}</strong>
+                  <img src="../../../herramientas.png" alt="" />
                 </div>
               </div>
               <div class="front">
@@ -198,10 +207,13 @@
                     <img :src="card.imagen" alt="" />
                   </div>
                   <div class="description">
-                    <h2>{{ card.title }}</h2>
+                    <h2 :style="{ fontSize: TituloSize, marginBottom: '5px' }">
+                      {{ card.title }}
+                    </h2>
                     <p
                       v-for="(DescripcionUnica, a) in card.description"
                       :key="a"
+                      :style="{ fontSize: TextSize }"
                     >
                       {{ DescripcionUnica }}
                     </p>
@@ -243,6 +255,8 @@ export default {
       MostrarTitulo: true,
       logoheight: "45px",
       logoWidth: "45px",
+      TituloSize: "40px",
+      TextSize: "20px",
       modules: [EffectCards],
       cartas: [
         {
@@ -400,12 +414,16 @@ export default {
           this.cardWidth = "170px";
           this.cardheight = "250px";
           this.MostrarTitulo = false;
+          this.TituloSize = "27.5px";
+          this.TextSize = "10px";
         } else {
           this.logoheight = "45px";
           this.cardWidth = "230px";
           this.cardheight = "350px";
           this.logoWidth = "45px";
           this.MostrarTitulo = true;
+          this.TituloSize = "40px";
+          this.TextSize = "20px";
         }
       }
     });
@@ -414,8 +432,6 @@ export default {
   },
 
   methods: {
-    // --- MÉTODOS DE PESTAÑAS ---
-
     PrimeraPestana() {
       if (this.PestanaFrontend) return;
       this.animarCambio("info");
@@ -435,8 +451,6 @@ export default {
       if (this.PestanaOther) return;
       this.animarCambio("B");
     },
-
-    // --- ANIMACIÓN GSAP ---
     animarCambio(nueva) {
       let actual = "info";
       if (this.PestanaBackend) actual = "estilo";
@@ -457,13 +471,10 @@ export default {
           this.PestanaDB = nueva === "A";
           this.PestanaOther = nueva === "B";
 
-          // Esperar a que Vue actualice el DOM
           await nextTick();
 
           const entrada = this.$refs[nueva];
           const entradaY = 100;
-
-          // ANIMAR ENTRADA
           gsap.fromTo(
             entrada,
             { y: entradaY, opacity: 0 },
@@ -482,6 +493,16 @@ export default {
 </script>
 
 <style scoped>
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Segoe UI Semibold", Tahoma, sans-serif;
+}
+
 .OpcionesaEscoger {
   width: 100%;
   height: 10%;
@@ -678,7 +699,7 @@ export default {
   position: absolute;
   width: 95%;
   height: 95%;
-  background-color: #151515;
+  background-color: #000000;
   border-radius: 5px;
   color: white;
   display: flex;
@@ -686,6 +707,10 @@ export default {
   justify-content: center;
   align-items: center;
   gap: 30px;
+}
+.back-content img {
+  width: 100px;
+  height: 100px;
 }
 
 .card:hover .content {
@@ -729,16 +754,14 @@ export default {
   box-shadow: 0px 0px 10px 5px #00000088;
   width: 100%;
   height: 50%;
-  background-color: #00ff3c99;
+  background-color: #ffffff;
   backdrop-filter: blur(5px);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-}
-.description p {
-  font-size: 15px;
+  color: black;
 }
 
 .title {

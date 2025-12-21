@@ -129,16 +129,10 @@ export default {
           componente: "ConocimientosVentana",
         },
         {
-          Nombre: "Estudios",
+          Nombre: "Estudios y Experiencias",
           id: "Estudios",
           imagenes: "./libro.png",
-          componente: "EstudiosVentana",
-        },
-        {
-          Nombre: "Experiencias",
-          id: "Experiencias",
-          imagenes: "./maletin.png",
-          componente: "ExperienciasVentana",
+          componente: "EstudiosExperienciasVentana",
         },
         {
           Nombre: "Proyecto",

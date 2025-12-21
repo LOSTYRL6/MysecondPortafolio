@@ -170,6 +170,16 @@ export default {
 </script>
 
 <style scoped>
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Segoe UI Semibold", Tahoma, sans-serif;
+}
+
 .OpcionesaEscoger {
   width: 100%;
   height: 10%;

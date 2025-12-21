@@ -177,4 +177,7 @@ export default {
 .Botones button:nth-child(3) {
   width: 50px;
 }
+.Botones {
+  background-color: red;
+}
 </style>

@@ -8,7 +8,7 @@ import ChromeVentana from "./components/AplicacionesVentana/ChromeVentana.vue";
 import CurriculumVentana from "./components/AplicacionesVentana/CurriculumVentana.vue";
 import OpcionesVentana from "./components/AplicacionesVentana/OpcionesVentana.vue";
 import ConocimientosVentana from "./components/AplicacionesVentana/ConocimientosVentana.vue";
-import EstudiosVentana from "./components/AplicacionesVentana/EstudiosVentana.vue";
+import EstudiosExperienciasVentana from "./components/AplicacionesVentana/EstudiosExperienciasVentana.vue";
 import ExperienciasVentana from "./components/AplicacionesVentana/ExperienciasVentana.vue";
 import ProyectoVentana from "./components/AplicacionesVentana/ProyectoVentana.vue";
 const app = createApp(App);
@@ -20,7 +20,7 @@ app.component("ChromeVentana", ChromeVentana);
 app.component("CurriculumVentana", CurriculumVentana);
 app.component("OpcionesVentana", OpcionesVentana);
 app.component("ConocimientosVentana", ConocimientosVentana);
-app.component("EstudiosVentana", EstudiosVentana);
+app.component("EstudiosExperienciasVentana", EstudiosExperienciasVentana);
 app.component("ExperienciasVentana", ExperienciasVentana);
 app.component("ProyectoVentana", ProyectoVentana);
 
