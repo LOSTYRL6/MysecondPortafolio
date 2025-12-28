@@ -34,19 +34,20 @@
             </div>
           </section>
           <section>
-            <div>Hola</div>
-            <div>Hola</div>
-            <div>Hola</div>
-            <div>Hola</div>
-            <div>Hola</div>
-            <div>Hola</div>
-            <div>Hoasdasdla</div>
-            <div>Hola</div>
-            <div>Hola</div>
-            <div>Holwqdas</div>
-            <div>Hoasdasla</div>
-            <div>Hola</div>
-            <div>Hola</div>
+            <div
+              v-for="(ApreindidoText, b) in slide.Aprendido"
+              :key="b"
+              :style="{ height: heightSize }"
+            >
+              <p
+                :style="{
+                  fontSize: SeMeTerminoLaIdea,
+                  margin: MarginText,
+                }"
+              >
+                {{ ApreindidoText }}
+              </p>
+            </div>
           </section>
         </div>
       </SwiperSlide>
@@ -79,6 +80,7 @@ export default {
           "~ Trabajo en equipo y proyectos escolares",
           "~ Desarrollo de pensamiento crítico y habilidades analíticas",
         ],
+        Aprendido: ["Matemáticas", "Física", "Economia", "Geografia"],
       },
       {
         titulo: "Centre Estudis Politecnics",
@@ -114,6 +116,15 @@ export default {
           "~ WordPress y desarrollo de plugins con React",
           "~ Optimización SEO y rendimiento web",
         ],
+        Aprendido: [
+          "Excels",
+          "JavaScripts",
+          "Wordpress",
+          "React",
+          "PHP",
+          "MySql",
+          "Node.js",
+        ],
       },
     ];
 
@@ -123,18 +134,30 @@ export default {
     const textSize = ref("30px");
     const tittleSize = ref("40px");
     const descriptionSize = ref("20px");
+    const SeMeTerminoLaIdea = ref("25px");
+    const MarginText = ref("5px");
+    const heightSize = ref("auto");
 
     const animarSlide = (swiper) => {
       const index = swiper.activeIndex ?? swiper;
       const el = imagenRefs.value[index];
       if (!el) return;
 
+      const contenido = el.nextElementSibling; // obtenemos solo el contenido del slide actual
+      if (!contenido) return;
+
+      // Resetear opacity antes de animar
+      gsap.set(contenido, { opacity: 0 });
+
       gsap.from(el, { opacity: 0, x: -50 });
       gsap.from(el.querySelector("h2"), { opacity: 0.5, x: -40, duration: 1 });
       gsap.from(el.querySelector("img"), {
         opacity: 0.5,
         y: -40,
-        duration: 1.5,
+        duration: 1,
+        onComplete() {
+          gsap.to(contenido, { opacity: 1, duration: 0.5 });
+        },
       });
     };
 
@@ -146,9 +169,12 @@ export default {
       const ro = new ResizeObserver((entries) => {
         for (let entry of entries) {
           const width = entry.contentRect.width;
-          textSize.value = width < 500 ? "20px" : "30px";
-          tittleSize.value = width < 500 ? "20px" : "40px";
-          descriptionSize.value = width < 500 ? "15px" : "20px";
+          textSize.value = width < 500 ? "20px" : "28px";
+          tittleSize.value = width < 500 ? "20px" : "38px";
+          descriptionSize.value = width < 500 ? "15px" : "25px";
+          SeMeTerminoLaIdea.value = width < 500 ? "12px" : "25px";
+          MarginText.value = width < 500 ? "1.5px" : "5px";
+          heightSize.value = width < 500 ? "18px" : "auto";
         }
       });
 
@@ -166,6 +192,9 @@ export default {
       textSize,
       tittleSize,
       descriptionSize,
+      SeMeTerminoLaIdea,
+      MarginText,
+      heightSize,
     };
   },
 };
@@ -219,6 +248,7 @@ h3 {
   background-color: #a8dadc;
   color: rgb(0, 0, 0);
   border-radius: 25px;
+  opacity: 0;
 }
 .contenido section {
   width: 90%;
@@ -249,12 +279,15 @@ h3 {
 }
 .contenido section:nth-child(3) div {
   width: auto;
-  height: auto;
   background-color: #457b9d;
   border-radius: 10px;
   display: flex;
+  padding: 5px;
   margin: 5px;
-  padding: 3px;
+  min-width: 50px;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
 }
 
 .imagne img {

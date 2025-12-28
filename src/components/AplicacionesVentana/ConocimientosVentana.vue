@@ -245,13 +245,12 @@ export default {
   },
   data() {
     return {
-      // ESTADOS DE LAS 4 PESTAÑAS
       PestanaFrontend: true,
       PestanaBackend: false,
       PestanaDB: false,
       PestanaOther: false,
-      cardWidth: "230px",
-      cardheight: "350px",
+      cardWidth: "300px",
+      cardheight: "420px",
       MostrarTitulo: true,
       logoheight: "45px",
       logoWidth: "45px",
@@ -418,8 +417,8 @@ export default {
           this.TextSize = "10px";
         } else {
           this.logoheight = "45px";
-          this.cardWidth = "230px";
-          this.cardheight = "350px";
+          this.cardWidth = "300px";
+          this.cardheight = "420px";
           this.logoWidth = "45px";
           this.MostrarTitulo = true;
           this.TituloSize = "40px";
@@ -627,8 +626,8 @@ h3 {
 }
 
 .swiper {
-  width: 230px;
-  height: 350px;
+  width: 300px;
+  height: 420px;
 }
 
 .swiper-slide {
@@ -643,8 +642,8 @@ h3 {
 /* From Uiverse.io by ElSombrero2 */
 .card {
   overflow: visible;
-  width: 230px;
-  height: 350px;
+  width: 300px;
+  height: 420px;
 }
 
 .content {

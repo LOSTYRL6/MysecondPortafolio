@@ -9,7 +9,6 @@
   <div class="gcse-container">
     <div class="gcse-search"></div>
   </div>
-
   <div
     class="Suerte"
     :style="{ width: botonWidth, height: botonHeight, fontSize: botonFontSize }"
@@ -61,7 +60,6 @@ export default {
       }
     });
 
-    // Observamos el contenedor de la ventana
     ro.observe(this.$el.parentElement);
   },
   methods: {

@@ -208,7 +208,6 @@ h3 {
   margin-right: 10px;
 }
 
-/* CONTENEDOR PRINCIPAL */
 .OpcionSelecionado {
   width: 100%;
   height: 90%;

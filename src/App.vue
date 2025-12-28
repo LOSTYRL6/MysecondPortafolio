@@ -76,7 +76,15 @@ import Aplicaciones from "./components/Aplicaciones.vue";
           </div>
 
           <div class="MenuDelHotfix" v-show="MostrarMenuHotFix">
-            <div class="buenoEjemplo1"></div>
+            <div class="buenoEjemplo1">
+              <section
+                v-for="(AplicacionesUnicas, index2) in AplicacioneExistente"
+                :key="index2"
+              >
+                <img v-bind:src="AplicacionesUnicas.imagenes" alt="" />
+                {{ AplicacionesUnicas.Nombre }}
+              </section>
+            </div>
             <div class="buenoEjemplo2">
               <img src="/windowflower.png" alt="" class="flowerIconos" />
               <div class="ApagarButton">
@@ -322,7 +330,7 @@ export default {
   position: relative;
 }
 .HotbarIconoVentana {
-  width: 50px;
+  width: 60px;
   height: 90%;
   display: flex;
   justify-content: center;
@@ -360,12 +368,28 @@ export default {
   align-items: center;
   justify-content: space-around;
   display: flex;
+  z-index: 9999999999;
 }
 .buenoEjemplo1 {
   width: 57%;
   height: 95%;
   background-color: white;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.buenoEjemplo1 section {
+  width: 100%;
+  height: 8%;
+  display: flex;
+  align-items: center;
+  margin: 3px;
+}
+.buenoEjemplo1 section img {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
 }
 .buenoEjemplo2 {
   width: 36%;
