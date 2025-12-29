@@ -36,7 +36,7 @@
     <swiper-slide class="ContenidoDelSlide">
       <section :style="{ height: sectionheightFirst }">
         <div
-          class="Complemento"
+          class="Complemento ComplementoCategoria"
           :style="{ width: complementWidth[0], height: complementHeight }"
         >
           <div>HTML</div>
@@ -54,12 +54,26 @@
           class="Complemento"
           :style="{ width: complementWidth[2], height: complementHeight }"
         >
-          <p>Tercer contenido</p>
+          <div class="Github">
+            <a href="">
+              <img src="../../../githubviolet.png" alt="" />
+              <h2>Cientifiks</h2>
+            </a>
+          </div>
         </div>
       </section>
 
-      <section :style="{ height: sectionheightSecond }">
-        <p>Contenido del segundo section</p>
+      <section
+        :style="{ height: sectionheightSecond }"
+        class="ImagenesProyectos"
+      >
+        <div
+          :style="{ width: widthImagenes, height: HeightImagenes }"
+          v-for="(Imagenes1, key) in SeccionImagenes1"
+          :key="key"
+        >
+          <img :src="Imagenes1" alt="" />
+        </div>
       </section>
     </swiper-slide>
     <swiper-slide class="IntroduccionSlide">
@@ -85,7 +99,7 @@
     <swiper-slide class="ContenidoDelSlide">
       <section :style="{ height: sectionheightFirst }">
         <div
-          class="Complemento"
+          class="Complemento ComplementoCategoria"
           :style="{ width: complementWidth[0], height: complementHeight }"
         >
           <div>MySQL</div>
@@ -102,12 +116,26 @@
           class="Complemento"
           :style="{ width: complementWidth[2], height: complementHeight }"
         >
-          <p>Tercer contenido</p>
+          <div class="Github">
+            <a href="">
+              <img src="../../../githubviolet.png" alt="" />
+              <h2>TaskForge</h2>
+            </a>
+          </div>
         </div>
       </section>
 
-      <section :style="{ height: sectionheightSecond }">
-        <p>Contenido del segundo section</p>
+      <section
+        :style="{ height: sectionheightSecond }"
+        class="ImagenesProyectos"
+      >
+        <div
+          :style="{ width: widthImagenes, height: HeightImagenes }"
+          v-for="(Imagenes2, key) in SeccionImagenes2"
+          :key="key"
+        >
+          <img :src="Imagenes2" alt="" />
+        </div>
       </section>
     </swiper-slide>
     <swiper-slide class="IntroduccionSlide">
@@ -133,13 +161,14 @@
     <swiper-slide class="ContenidoDelSlide">
       <section :style="{ height: sectionheightFirst }">
         <div
-          class="Complemento"
+          class="Complemento ComplementoCategoria"
           :style="{ width: complementWidth[0], height: complementHeight }"
         >
           <div>Vue</div>
           <div>Laravel</div>
           <div>Eloquent</div>
           <div>GSAP</div>
+          <div>SCSS</div>
         </div>
         <div
           class="Complemento"
@@ -151,7 +180,12 @@
           class="Complemento"
           :style="{ width: complementWidth[2], height: complementHeight }"
         >
-          <p>Tercer contenido</p>
+          <div class="Github">
+            <a href="">
+              <img src="../../../githubviolet.png" alt="" />
+              <h2>Sing&Drink</h2>
+            </a>
+          </div>
         </div>
       </section>
       <section :style="{ height: sectionheightSecond }">
@@ -182,13 +216,14 @@
     <swiper-slide class="ContenidoDelSlide">
       <section :style="{ height: sectionheightFirst }">
         <div
-          class="Complemento"
+          class="Complemento ComplementoCategoria"
           :style="{ width: complementWidth[0], height: complementHeight }"
         >
           <div>Vue</div>
           <div>Laravel</div>
-          <div>Vue</div>
-          <div>Vue</div>
+          <div>GSAP</div>
+          <div>MAPBOX</div>
+          <div>SWIPER.JS</div>
         </div>
         <div
           class="Complemento"
@@ -200,7 +235,12 @@
           class="Complemento"
           :style="{ width: complementWidth[2], height: complementHeight }"
         >
-          <p>Tercer contenido</p>
+          <div class="Github">
+            <a href="">
+              <img src="../../../githubviolet.png" alt="" />
+              <h2>GGGamers</h2>
+            </a>
+          </div>
         </div>
       </section>
       <section :style="{ height: sectionheightSecond }">
@@ -228,11 +268,15 @@ export default {
   data() {
     return {
       MaximoText: "400px",
-      sectionheightFirst: "35%", // altura del primer section
-      sectionheightSecond: "65%", // altura del segundo section
+      sectionheightFirst: "35%",
+      sectionheightSecond: "65%",
+      widthImagenes: "550px",
+      HeightImagenes: "190px",
       sectionheight: "50%",
-      complementWidth: ["35%", "35%", "20%"], // para los 3 divs
+      complementWidth: ["35%", "35%", "20%"],
       complementHeight: "90%",
+      SeccionImagenes1: ["./1.png", "./2.png", "./4.png", "./5.gif"],
+      SeccionImagenes2: ["./6.png", "./7.png", "./8.png", "./9.gif"],
     };
   },
   setup() {
@@ -248,13 +292,17 @@ export default {
         if (ancho < 500) {
           this.MaximoText = "400px";
           this.sectionheightFirst = "100vh";
-          this.sectionheightSecond = "100%";
+          this.sectionheightSecond = "auto";
+          this.widthImagenes = "350px";
+          this.HeightImagenes = "170px";
           this.complementWidth = ["90%", "90%", "90%"];
           this.complementHeight = "200px";
         } else {
           this.MaximoText = "80%";
-          this.sectionheightFirst = "35%";
-          this.sectionheightSecond = "65%";
+          this.sectionheightFirst = "30%";
+          this.sectionheightSecond = "70%";
+          this.widthImagenes = "550px";
+          this.HeightImagenes = "190px";
           this.complementWidth = ["35%", "35%", "20%"];
           this.complementHeight = "90%";
         }
@@ -289,8 +337,43 @@ export default {
   background-color: #a8dadc;
   padding: 10px 10px;
   border-radius: 25px;
+  margin: 5px;
 }
-.Complemento div {
+.ImagenesProyectos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.ImagenesProyectos div {
+  background-color: red;
+  margin: 7.5px;
+}
+.ImagenesProyectos div img {
+  width: 100%;
+  height: 100%;
+}
+
+.Github {
+  width: 95%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+}
+.Github a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+}
+.Github img {
+  width: 50%;
+  height: 75%;
+}
+.ComplementoCategoria div {
   width: 120px;
   height: 50px;
   display: flex;
@@ -311,10 +394,9 @@ export default {
   align-items: center;
 }
 .ContenidoDelSlide section:nth-child(2) {
-  background-color: blue;
-}
-.IntroduccionSlide {
-  padding: 35px 55px;
+  width: 100%;
+  background-color: #a8dadc;
+  border-radius: 5px;
 }
 /* Para pantallas grandes */
 .ContenidoDelSlide section:first-child .Complemento:nth-child(1),
@@ -338,11 +420,16 @@ export default {
 .swiper-slide {
   flex-direction: column;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: 18px;
   color: #000000;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   height: 100%;
+  text-align: center;
+  overflow: hidden;
 }
 
 .parallax-bg {
