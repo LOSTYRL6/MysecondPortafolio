@@ -245,7 +245,7 @@ h3 {
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
-  background-color: #a8dadc;
+  background-color: #9feb9b;
   color: rgb(0, 0, 0);
   border-radius: 25px;
   opacity: 0;

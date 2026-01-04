@@ -14,239 +14,83 @@
     class="mySwiper"
   >
     <div class="parallax-bg" data-swiper-parallax="-23%"></div>
-    <swiper-slide class="IntroduccionSlide">
-      <img src="../../../project1.png" class="Fondo" alt="" />
-      <div class="title" data-swiper-parallax="-300">Projecto Cientifiks</div>
-      <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
-      <div
-        :style="{ maxWidth: MaximoText }"
-        class="text"
-        data-swiper-parallax="-100"
-      >
-        <p>
-          Página web propuesta por un grupo de niños, quienes nos proporcionaron
-          las directrices para el desarrollo de una plataforma interactiva. El
-          proyecto incluye cuatro juegos, cuyos nombres y conceptos fueron
-          definidos por los propios niños, fomentando así su participación
-          activa en el diseño y contenido del sitio, contiene tambien una tabla
-          de clasificacion
-        </p>
-      </div>
-    </swiper-slide>
-    <swiper-slide class="ContenidoDelSlide">
-      <section :style="{ height: sectionheightFirst }">
-        <div
-          class="Complemento ComplementoCategoria"
-          :style="{ width: complementWidth[0], height: complementHeight }"
-        >
-          <div>HTML</div>
-          <div>CSS</div>
-          <div>JavaScripts</div>
-          <div>PHP</div>
+    <template v-for="(proyecto, index) in proyectos" :key="index">
+      <swiper-slide class="IntroduccionSlide">
+        <img :src="proyecto.imagen" class="Fondo" alt="" />
+        <div class="title" data-swiper-parallax="-300">
+          {{ proyecto.titulo }}
         </div>
+        <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
         <div
-          class="Complemento"
-          :style="{ width: complementWidth[1], height: complementHeight }"
+          :style="{ maxWidth: MaximoText }"
+          class="text"
+          data-swiper-parallax="-100"
         >
-          <p>Segundo contenido</p>
+          <p>{{ proyecto.descripcion }}</p>
         </div>
-        <div
-          class="Complemento"
-          :style="{ width: complementWidth[2], height: complementHeight }"
-        >
-          <div class="Github">
-            <a href="">
-              <img src="../../../githubviolet.png" alt="" />
-              <h2>Cientifiks</h2>
-            </a>
+      </swiper-slide>
+      <swiper-slide class="ContenidoDelSlide">
+        <section :style="{ height: sectionheightFirst }">
+          <div
+            class="Complemento ComplementoCategoria"
+            :style="{ width: complementWidth[0], height: complementHeight }"
+          >
+            <div v-for="tech in proyecto.tecnologias" :key="tech">
+              {{ tech }}
+            </div>
           </div>
-        </div>
-      </section>
+          <div
+            class="Complemento segundootexto"
+            :style="{ width: complementWidth[1], height: complementHeight }"
+          >
+            <h3 v-for="text in proyecto.segundoContenido" :key="text">
+              {{ text }}
+            </h3>
+          </div>
+          <div
+            class="Complemento"
+            :style="{ width: complementWidth[2], height: complementHeight }"
+          >
+            <div class="Github">
+              <a :href="proyecto.github">
+                <img src="../../../githubviolet.png" alt="" />
+                <h2>{{ proyecto.titulo }}</h2>
+              </a>
+            </div>
+          </div>
+        </section>
 
-      <section
-        :style="{ height: sectionheightSecond }"
-        class="ImagenesProyectos"
-      >
-        <div
-          :style="{ width: widthImagenes, height: HeightImagenes }"
-          v-for="(Imagenes1, key) in SeccionImagenes1"
-          :key="key"
+        <section
+          :style="{ height: sectionheightSecond }"
+          class="flip-cards-container"
         >
-          <img :src="Imagenes1" alt="" />
-        </div>
-      </section>
-    </swiper-slide>
-    <swiper-slide class="IntroduccionSlide">
-      <img src="../../../project2.png" class="Fondo" alt="" />
-      <div class="title" data-swiper-parallax="-300">TaskForge</div>
-      <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
-      <div
-        :style="{ maxWidth: MaximoText }"
-        class="text"
-        data-swiper-parallax="-100"
-      >
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
-          laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
-          Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
-          Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
-          velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
-          libero. Aenean feugiat non eros quis feugiat.
-        </p>
-      </div>
-    </swiper-slide>
-    <swiper-slide class="ContenidoDelSlide">
-      <section :style="{ height: sectionheightFirst }">
-        <div
-          class="Complemento ComplementoCategoria"
-          :style="{ width: complementWidth[0], height: complementHeight }"
-        >
-          <div>MySQL</div>
-          <div>PHP</div>
-          <div>Bootstrap</div>
-        </div>
-        <div
-          class="Complemento"
-          :style="{ width: complementWidth[1], height: complementHeight }"
-        >
-          <p>Segundo contenido</p>
-        </div>
-        <div
-          class="Complemento"
-          :style="{ width: complementWidth[2], height: complementHeight }"
-        >
-          <div class="Github">
-            <a href="">
-              <img src="../../../githubviolet.png" alt="" />
-              <h2>TaskForge</h2>
-            </a>
-          </div>
-        </div>
-      </section>
+          <div
+            class="flip-card"
+            :style="{ height: cardHeight, width: cardwidth }"
+            v-for="(card, index) in proyecto.cartasFlip"
+            :key="index"
+          >
+            <div class="flip-card-inner" :class="{ flipped: card.flipped }">
+              <!-- Front -->
+              <div class="flip-card-front">
+                <button class="flip-btn" @click="card.flipped = !card.flipped">
+                  ↻
+                </button>
+                <img :src="card.frontimg" alt="" />
+              </div>
 
-      <section
-        :style="{ height: sectionheightSecond }"
-        class="ImagenesProyectos"
-      >
-        <div
-          :style="{ width: widthImagenes, height: HeightImagenes }"
-          v-for="(Imagenes2, key) in SeccionImagenes2"
-          :key="key"
-        >
-          <img :src="Imagenes2" alt="" />
-        </div>
-      </section>
-    </swiper-slide>
-    <swiper-slide class="IntroduccionSlide">
-      <img src="../../../project3.png" class="Fondo" alt="" />
-      <div class="title" data-swiper-parallax="-300">Sing & Drink</div>
-      <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
-      <div
-        :style="{ maxWidth: MaximoText }"
-        class="text"
-        data-swiper-parallax="-100"
-      >
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
-          laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
-          Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
-          Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
-          velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
-          libero. Aenean feugiat non eros quis feugiat.
-        </p>
-      </div>
-    </swiper-slide>
-    <swiper-slide class="ContenidoDelSlide">
-      <section :style="{ height: sectionheightFirst }">
-        <div
-          class="Complemento ComplementoCategoria"
-          :style="{ width: complementWidth[0], height: complementHeight }"
-        >
-          <div>Vue</div>
-          <div>Laravel</div>
-          <div>Eloquent</div>
-          <div>GSAP</div>
-          <div>SCSS</div>
-        </div>
-        <div
-          class="Complemento"
-          :style="{ width: complementWidth[1], height: complementHeight }"
-        >
-          <p>Segundo contenido</p>
-        </div>
-        <div
-          class="Complemento"
-          :style="{ width: complementWidth[2], height: complementHeight }"
-        >
-          <div class="Github">
-            <a href="">
-              <img src="../../../githubviolet.png" alt="" />
-              <h2>Sing&Drink</h2>
-            </a>
+              <!-- Back -->
+              <div class="flip-card-back">
+                <button class="flip-btn" @click="card.flipped = !card.flipped">
+                  ↻
+                </button>
+                <img :src="card.backimg" alt="" />
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
-      <section :style="{ height: sectionheightSecond }">
-        <p>Contenido del segundo section</p>
-      </section>
-    </swiper-slide>
-    <swiper-slide class="IntroduccionSlide">
-      <img src="../../../project4.png" class="Fondo" alt="" />
-      <div class="title" data-swiper-parallax="-300">GGGamers</div>
-      <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
-      <div
-        :style="{ maxWidth: MaximoText }"
-        class="text"
-        data-swiper-parallax="-100"
-      >
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
-          laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
-          Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
-          Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
-          velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
-          libero. Aenean feugiat non eros quis feugiat.
-        </p>
-      </div>
-    </swiper-slide>
-
-    <swiper-slide class="ContenidoDelSlide">
-      <section :style="{ height: sectionheightFirst }">
-        <div
-          class="Complemento ComplementoCategoria"
-          :style="{ width: complementWidth[0], height: complementHeight }"
-        >
-          <div>Vue</div>
-          <div>Laravel</div>
-          <div>GSAP</div>
-          <div>MAPBOX</div>
-          <div>SWIPER.JS</div>
-        </div>
-        <div
-          class="Complemento"
-          :style="{ width: complementWidth[1], height: complementHeight }"
-        >
-          <p>Segundo contenido</p>
-        </div>
-        <div
-          class="Complemento"
-          :style="{ width: complementWidth[2], height: complementHeight }"
-        >
-          <div class="Github">
-            <a href="">
-              <img src="../../../githubviolet.png" alt="" />
-              <h2>GGGamers</h2>
-            </a>
-          </div>
-        </div>
-      </section>
-      <section :style="{ height: sectionheightSecond }">
-        <p>Contenido del segundo section</p>
-      </section>
-    </swiper-slide>
+        </section>
+      </swiper-slide>
+    </template>
   </swiper>
 </template>
 <script>
@@ -270,13 +114,120 @@ export default {
       MaximoText: "400px",
       sectionheightFirst: "35%",
       sectionheightSecond: "65%",
-      widthImagenes: "550px",
-      HeightImagenes: "190px",
+      flip1: false,
+      flip2: false,
+      cardHeight: "325px",
+      cardwidth: "550px",
       sectionheight: "50%",
       complementWidth: ["35%", "35%", "20%"],
       complementHeight: "90%",
-      SeccionImagenes1: ["./1.png", "./2.png", "./4.png", "./5.gif"],
-      SeccionImagenes2: ["./6.png", "./7.png", "./8.png", "./9.gif"],
+
+      proyectos: [
+        {
+          imagen: "./project1.png",
+          titulo: "Projecto Cientifiks",
+          descripcion:
+            "Página web propuesta por un grupo de niños, quienes nos proporcionaron las directrices...",
+          tecnologias: ["HTML", "CSS", "JavaScript", "PHP"],
+          segundoContenido: [
+            "BFS",
+            "Utilizar PHP para conectar al BD",
+            "Creacion de juego con Javascripts",
+          ],
+          github: "#",
+          contenidoSecondSection: "Contenido del segundo section",
+          cartasFlip: [
+            {
+              frontimg: "./1.png",
+              backimg: "./2.png",
+              flipped: false,
+            },
+            {
+              frontimg: "./4.png",
+              backimg: "./5.gif",
+              flipped: false,
+            },
+          ],
+        },
+        {
+          imagen: "./project2.png",
+          titulo: "TaskForge",
+          descripcion:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+          tecnologias: ["MySQL", "PHP", "Bootstrap"],
+          segundoContenido: [
+            "Implementacion de drag and drop",
+            "Utilizacion de cookie y sesion",
+            "Utilizar Json para cambiar contenido",
+          ],
+          github: "#",
+          contenidoSecondSection: "Contenido del segundo section",
+          cartasFlip: [
+            {
+              frontimg: "./6.png",
+              backimg: "./7.png",
+              flipped: false,
+            },
+            {
+              frontimg: "./8.png",
+              backimg: "./9.gif",
+              flipped: false,
+            },
+          ],
+        },
+        {
+          imagen: "./project3.png",
+          titulo: "Sing & Drink",
+          descripcion:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+          tecnologias: ["Vue", "Laravel", "Eloquent", "GSAP", "SCSS"],
+          segundoContenido: [
+            "Usar el framework de lavavel eloquent",
+            "Utilizacion del Mapbox",
+            "Utilizacion del controller para enviar datos",
+          ],
+          github: "#",
+          contenidoSecondSection: "Contenido del segundo section",
+          cartasFlip: [
+            {
+              frontimg: "Card 1",
+              backimg: "Back 1",
+              flipped: false,
+            },
+            {
+              frontimg: "Card 2",
+              backimg: "Back 2",
+              flipped: false,
+            },
+          ],
+        },
+        {
+          imagen: "./project4.png",
+          titulo: "GGGamers",
+          descripcion:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+          tecnologias: ["Vue", "Laravel", "GSAP", "MAPBOX", "SWIPER.JS"],
+          segundoContenido: [
+            "Algoritmo de busqueda",
+            "Enviacion de email y contenido con QR",
+            "Utilizar Axios para mandar informacion",
+          ],
+          github: "#",
+          contenidoSecondSection: "Contenido del segundo section",
+          cartasFlip: [
+            {
+              frontimg: "Card 1",
+              backimg: "Back 1",
+              flipped: false,
+            },
+            {
+              frontimg: "Card 2",
+              backimg: "Back 2",
+              flipped: false,
+            },
+          ],
+        },
+      ],
     };
   },
   setup() {
@@ -293,18 +244,18 @@ export default {
           this.MaximoText = "400px";
           this.sectionheightFirst = "100vh";
           this.sectionheightSecond = "auto";
-          this.widthImagenes = "350px";
-          this.HeightImagenes = "170px";
           this.complementWidth = ["90%", "90%", "90%"];
           this.complementHeight = "200px";
+          this.cardHeight = "200px";
+          this.cardwidth = "300px";
         } else {
           this.MaximoText = "80%";
           this.sectionheightFirst = "30%";
           this.sectionheightSecond = "70%";
-          this.widthImagenes = "550px";
-          this.HeightImagenes = "190px";
-          this.complementWidth = ["35%", "35%", "20%"];
+          this.complementWidth = ["35%", "27.5%", "20%"];
           this.complementHeight = "90%";
+          this.cardHeight = "340px";
+          this.cardwidth = "550px";
         }
       }
     });
@@ -328,6 +279,12 @@ export default {
   z-index: 0;
   opacity: 0.5;
 }
+.IntroduccionSlide {
+  justify-content: center;
+}
+.segundootexto {
+  flex-direction: column;
+}
 .Complemento {
   display: flex;
   flex-wrap: wrap;
@@ -344,15 +301,6 @@ export default {
   flex-wrap: wrap;
   justify-content: space-around;
 }
-.ImagenesProyectos div {
-  background-color: red;
-  margin: 7.5px;
-}
-.ImagenesProyectos div img {
-  width: 100%;
-  height: 100%;
-}
-
 .Github {
   width: 95%;
   height: 95%;
@@ -374,12 +322,14 @@ export default {
   height: 75%;
 }
 .ComplementoCategoria div {
-  width: 120px;
-  height: 50px;
+  width: 115px;
+  height: 55px;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #457b9d;
+  background: linear-gradient(to right, #2e9dd0, #1d54ad);
+  border-radius: 2rem;
 }
 .ContenidoDelSlide {
   height: 100%;
@@ -408,15 +358,6 @@ export default {
   width: 20%;
 }
 
-/* Para pantallas pequeñas (<500px) */
-@media (max-width: 500px) {
-  .ContenidoDelSlide section:first-child .Complemento {
-    width: 90% !important;
-    margin: 0 auto; /* centramos la columna */
-    margin-bottom: 10px; /* separación entre los divs */
-  }
-}
-
 .swiper-slide {
   flex-direction: column;
   position: relative;
@@ -429,7 +370,6 @@ export default {
   box-sizing: border-box;
   height: 100%;
   text-align: center;
-  overflow: hidden;
 }
 
 .parallax-bg {
@@ -456,5 +396,79 @@ export default {
 .swiper-slide .text {
   font-size: 25px;
   line-height: 1.3;
+}
+
+/* From Uiverse.io by joe-watson-sbf */
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
+  margin: 20px;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: 900;
+  text-align: center;
+  margin: 0;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.4s;
+  transform-style: preserve-3d;
+}
+
+.flip-card-front,
+.flip-card-back {
+  box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  padding: 10px;
+}
+
+.flip-card-front {
+  background-color: #1d54ad;
+  color: rgb(255, 255, 255);
+}
+.flip-card-front img {
+  height: 100%;
+  border-radius: 1rem;
+}
+
+.flip-card-back {
+  background-color: #2e9dd0; /* azul medio */
+  color: white;
+  transform: rotateY(180deg);
+}
+.flip-card-back img {
+  height: 100%;
+  border-radius: 1rem;
+}
+.flip-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: coral;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Reemplazar el hover */
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
 }
 </style>

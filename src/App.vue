@@ -75,11 +75,19 @@ import Aplicaciones from "./components/Aplicaciones.vue";
             </div>
           </div>
 
+          <div class="horario">
+            <section><img src="/flag.png" alt="" /></section>
+            <section><img src="/internet.png" alt="" /></section>
+            <section><img src="/bateria.png" alt="" /></section>
+            <section><img src="/sonido.png" alt="" /></section>
+          </div>
+
           <div class="MenuDelHotfix" v-show="MostrarMenuHotFix">
             <div class="buenoEjemplo1">
               <section
                 v-for="(AplicacionesUnicas, index2) in AplicacioneExistente"
                 :key="index2"
+                @click="abrirVentana(AplicacionesUnicas)"
               >
                 <img v-bind:src="AplicacionesUnicas.imagenes" alt="" />
                 {{ AplicacionesUnicas.Nombre }}
@@ -302,7 +310,6 @@ export default {
 .parteSuperior {
   width: 100%;
   height: 93%;
-  border: solid 1px blue;
   position: relative;
   display: flex;
 }
@@ -310,12 +317,43 @@ export default {
   position: relative;
   width: 100%;
   height: 7%;
-  border: solid rgb(0, 0, 0) 1px;
-  background-color: rgba(0, 0, 0, 0.305);
+  background-color: rgb(49 60 71 / 30%);
+  background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.1333333333) 50px,
+      transparent 80px
+    ),
+    linear-gradient(
+      270deg,
+      rgba(0, 0, 0, 0.1333333333) 200px,
+      transparent 230px
+    );
   display: flex;
   flex-direction: row;
   align-items: center;
   padding-left: 7px;
+}
+.horario {
+  position: absolute;
+  right: 0;
+  width: 250px;
+  justify-content: baseline;
+  align-items: center;
+  height: 100%;
+  display: flex;
+}
+.horario section {
+  width: 30px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  margin-top: 10px;
+}
+.horario section img {
+  width: 20px;
+  height: 20px;
 }
 .ContenedorDelAplicaciones {
   display: flex;
@@ -384,6 +422,7 @@ export default {
   height: 8%;
   display: flex;
   align-items: center;
+  cursor: pointer;
   margin: 3px;
 }
 .buenoEjemplo1 section img {
