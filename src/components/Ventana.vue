@@ -6,11 +6,18 @@
     v-show="!minimizado"
   >
     <div class="BarraTitulo" @mousedown="iniciarDrag">
-      <p>{{ titulo }}</p>
+      <div class="tituloYfoto">
+        <img :src="img" alt="" />
+        <p>{{ titulo }}</p>
+      </div>
       <div class="Botones">
-        <button @click="$emit('toggle', id)">_</button>
-        <button @click="maximizar">🗖</button>
-        <button @click="$emit('cerrar', id)">X</button>
+        <button @click="$emit('toggle', id)">
+          <img src="/_.png" alt="" />
+        </button>
+        <button @click="maximizar"><img src="/🗖.png" alt="" /></button>
+        <button @click="$emit('cerrar', id)">
+          <img src="/x.png" alt="" />
+        </button>
       </div>
     </div>
 
@@ -26,6 +33,7 @@ export default {
     titulo: String,
     id: String,
     minimizado: Boolean,
+    img: String,
   },
   data() {
     return {
@@ -127,16 +135,18 @@ export default {
   height: 27px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 6px;
   cursor: move;
   user-select: none;
 
-  background: linear-gradient(to bottom, #e3eefc 0%, #c2d7f3 45%, #9ebde4 100%);
-
   color: #1b3557;
   font-weight: bold;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.75);
+}
+.tituloYfoto {
+  height: 100%;
+  margin-top: 5px;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: row;
 }
 
 .BarraTitulo .Botones button {
@@ -144,21 +154,76 @@ export default {
   height: 100%;
   cursor: pointer;
   font-weight: bold;
-  border-radius: 3px;
   padding: 0 8px;
+  border: 1px solid rgba(0, 0, 0, 0.6666666667);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.BarraTitulo p {
+  margin-left: 5px;
+  margin-top: 5px;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.841),
+    0 0 10px rgba(255, 255, 255, 0.736), 0 0 20px rgba(255, 255, 255, 0.6);
 }
 
 .BarraTitulo .Botones button:nth-child(1) {
-  background: linear-gradient(#fafafa, #dcdcdc);
+  background: linear-gradient(#fafafa55, #dcdcdc5c);
+  border-bottom-left-radius: 5px;
+}
+.BarraTitulo .Botones button:nth-child(1):hover {
+  background: radial-gradient(circle at bottom, #0bfdfa, transparent 65%),
+    linear-gradient(#86a7bc 50%, #0f3c6d 0);
+  -webkit-box-shadow: 0 0 7px 3px #5dc4f0,
+    inset 0 0 0 1px hsla(0, 0%, 100%, 0.4666666667);
+  box-shadow: 0 0 7px 3px #5dc4f0,
+    inset 0 0 0 1px hsla(0, 0%, 100%, 0.4666666667);
 }
 
 .BarraTitulo .Botones button:nth-child(2) {
-  background: linear-gradient(#fafafa, #dcdcdc);
+  background: linear-gradient(#fafafa55, #dcdcdc5c);
+}
+.BarraTitulo .Botones button:nth-child(2):hover {
+  background: radial-gradient(circle at bottom, #0bfdfa, transparent 65%),
+    linear-gradient(#86a7bc 50%, #0f3c6d 0);
+  -webkit-box-shadow: 0 0 7px 3px #5dc4f0,
+    inset 0 0 0 1px hsla(0, 0%, 100%, 0.4666666667);
+  box-shadow: 0 0 7px 3px #5dc4f0,
+    inset 0 0 0 1px hsla(0, 0%, 100%, 0.4666666667);
 }
 
 .BarraTitulo .Botones button:nth-child(3) {
-  background: linear-gradient(#ff7a7a, #dd3c3c);
+  width: 50px;
+  background-color: #d54f36;
   color: white;
+  border-bottom-right-radius: 5px;
+}
+.BarraTitulo .Botones button:nth-child(3):hover {
+  background: radial-gradient(
+      circle at 50% 140%,
+      rgba(255, 120, 120, 0.6),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at -40% 50%,
+      rgba(255, 100, 100, 0.45),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 140% 50%,
+      rgba(255, 100, 100, 0.35),
+      transparent 55%
+    ),
+    linear-gradient(to bottom, #f3c1b8 0%, #d96b5c 45%, #b1342a 100%);
+
+  box-shadow: 0 0 7px 3px rgba(230, 120, 120, 0.65),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+
+  color: white;
+}
+.Botones img {
+  width: 17px;
+  height: 17px;
 }
 
 .Contenido {
@@ -171,13 +236,12 @@ export default {
   margin: 7px;
   border-radius: 5px;
 }
-.Botones button {
-  margin: 0.5px;
-}
-.Botones button:nth-child(3) {
-  width: 50px;
-}
 .Botones {
-  background-color: red;
+  height: 80%;
+  display: flex;
+  flex-direction: row;
+  margin-right: 5px;
+  justify-content: center;
+  align-items: center;
 }
 </style>

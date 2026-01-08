@@ -7,7 +7,7 @@
       @click="PrimeraPestana"
     >
       <img
-        src="../../../public/monitor.png"
+        src="/public/monitor.png"
         :style="{ width: logoWidth, height: logoheight }"
         alt=""
       />
@@ -21,7 +21,7 @@
       @click="SegundaPestana"
     >
       <img
-        src="../../../public/engranajes.png"
+        src="/engranajes.png"
         :style="{ width: logoWidth, height: logoheight }"
         alt=""
       />
@@ -35,7 +35,7 @@
       @click="TerceraPestana"
     >
       <img
-        src="../../../public/bd.png"
+        src="/bd.png"
         :style="{ width: logoWidth, height: logoheight }"
         alt=""
       />
@@ -49,7 +49,7 @@
       @click="CuartaPestana"
     >
       <img
-        src="../../../public/herramientas.png"
+        src="/herramientas.png"
         :style="{ width: logoWidth, height: logoheight }"
         alt=""
       />
@@ -72,7 +72,7 @@
             <div class="content">
               <div class="back">
                 <div class="back-content">
-                  <img src="../../../monitor.png" alt="" />
+                  <img src="/monitor.png" alt="" />
                 </div>
               </div>
               <div class="front">
@@ -114,7 +114,7 @@
             <div class="content">
               <div class="back">
                 <div class="back-content">
-                  <img src="../../../engranajes.png" alt="" />
+                  <img src="/engranajes.png" alt="" />
                 </div>
               </div>
               <div class="front">
@@ -156,7 +156,7 @@
             <div class="content">
               <div class="back">
                 <div class="back-content">
-                  <img src="../../../bd.png" alt="" />
+                  <img src="/bd.png" alt="" />
                 </div>
               </div>
               <div class="front">
@@ -198,7 +198,7 @@
             <div class="content">
               <div class="back">
                 <div class="back-content">
-                  <img src="../../../herramientas.png" alt="" />
+                  <img src="/herramientas.png" alt="" />
                 </div>
               </div>
               <div class="front">

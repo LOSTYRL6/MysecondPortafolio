@@ -48,6 +48,7 @@ import Aplicaciones from "./components/Aplicaciones.vue";
               :key="ventana.id"
               :titulo="ventana.Nombre"
               :id="ventana.id"
+              :img="ventana.imagenes"
               :minimizado="ventana.minimizado"
               @toggle="toggleVentana"
               @cerrar="cerrarVentana"
@@ -80,6 +81,10 @@ import Aplicaciones from "./components/Aplicaciones.vue";
             <section><img src="/internet.png" alt="" /></section>
             <section><img src="/bateria.png" alt="" /></section>
             <section><img src="/sonido.png" alt="" /></section>
+            <div class="HorarioYdate">
+              {{ hora }}
+              {{ fecha }}
+            </div>
           </div>
 
           <div class="MenuDelHotfix" v-show="MostrarMenuHotFix">
@@ -119,6 +124,8 @@ export default {
       MostrarPantallanegra: false,
       MostrarPantallaPrincipal: false,
       MostrarMenuHotFix: false,
+      hora: "",
+      fecha: "",
       AplicacioneExistente: [
         {
           Nombre: "Chrome",
@@ -157,7 +164,7 @@ export default {
           componente: "ProyectoVentana",
         },
       ],
-      ventanasAbiertas: [], // <-- Aquí
+      ventanasAbiertas: [],
     };
   },
   methods: {
@@ -241,11 +248,29 @@ export default {
 
       ventana.minimizado = !ventana.minimizado;
     },
+    actualizarFechaHora() {
+      const ahora = new Date();
+
+      const dia = String(ahora.getDate()).padStart(2, "0");
+      const mes = String(ahora.getMonth() + 1).padStart(2, "0");
+      const año = ahora.getFullYear();
+
+      const horas = String(ahora.getHours()).padStart(2, "0");
+      const minutos = String(ahora.getMinutes()).padStart(2, "0");
+
+      this.fecha = `${dia}/${mes}/${año}`;
+      this.hora = `${horas}:${minutos}`;
+    },
   },
   mounted() {
     setTimeout(() => {
       this.CambiarPantalla = false;
     }, 7650);
+    this.actualizarFechaHora();
+    this.timer = setInterval(this.actualizarFechaHora, 1000);
+  },
+  beforeUnmount() {
+    clearInterval(this.timer);
   },
 
   watch: {
@@ -354,6 +379,17 @@ export default {
 .horario section img {
   width: 20px;
   height: 20px;
+}
+.HorarioYdate {
+  display: flex;
+  flex-direction: column;
+  width: 90px;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: end;
+  color: white;
+  padding: 5px;
 }
 .ContenedorDelAplicaciones {
   display: flex;

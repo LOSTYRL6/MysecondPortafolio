@@ -17,12 +17,16 @@
     <template v-for="(proyecto, index) in proyectos" :key="index">
       <swiper-slide class="IntroduccionSlide">
         <img :src="proyecto.imagen" class="Fondo" alt="" />
-        <div class="title" data-swiper-parallax="-300">
+        <div
+          class="title"
+          :style="{ fontSize: TittleSize }"
+          data-swiper-parallax="-300"
+        >
           {{ proyecto.titulo }}
         </div>
         <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
         <div
-          :style="{ maxWidth: MaximoText }"
+          :style="{ maxWidth: MaximoText, fontSize: TextSize }"
           class="text"
           data-swiper-parallax="-100"
         >
@@ -53,7 +57,7 @@
           >
             <div class="Github">
               <a :href="proyecto.github">
-                <img src="../../../githubviolet.png" alt="" />
+                <img src="/githubviolet.png" alt="" />
                 <h2>{{ proyecto.titulo }}</h2>
               </a>
             </div>
@@ -111,11 +115,13 @@ export default {
   },
   data() {
     return {
-      MaximoText: "400px",
+      TextSize: "5px",
+      MaximoText: "350px",
       sectionheightFirst: "35%",
       sectionheightSecond: "65%",
       flip1: false,
       flip2: false,
+      TittleSize: "200px",
       cardHeight: "325px",
       cardwidth: "550px",
       sectionheight: "50%",
@@ -127,7 +133,7 @@ export default {
           imagen: "./project1.png",
           titulo: "Projecto Cientifiks",
           descripcion:
-            "Página web propuesta por un grupo de niños, quienes nos proporcionaron las directrices...",
+            "Proyecto de página web desarrollado a partir de una propuesta infantil, siguiendo las directrices proporcionadas. Incluye cuatro juegos interactivos y un sistema de clasificación para cada uno",
           tecnologias: ["HTML", "CSS", "JavaScript", "PHP"],
           segundoContenido: [
             "BFS",
@@ -153,7 +159,7 @@ export default {
           imagen: "./project2.png",
           titulo: "TaskForge",
           descripcion:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+            "Herramienta web de gestión de proyectos que facilita la creación de proyectos, el seguimiento de tareas y la colaboración entre usuarios.",
           tecnologias: ["MySQL", "PHP", "Bootstrap"],
           segundoContenido: [
             "Implementacion de drag and drop",
@@ -179,7 +185,7 @@ export default {
           imagen: "./project3.png",
           titulo: "Sing & Drink",
           descripcion:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+            "Sing & Drink es una plataforma web donde los usuarios pueden consultar bares o pubs con actuaciones musicales y acceder a los perfiles de los cantantes. Los artistas, a su vez, disponen de herramientas para inscribirse y participar en los eventos.",
           tecnologias: ["Vue", "Laravel", "Eloquent", "GSAP", "SCSS"],
           segundoContenido: [
             "Usar el framework de lavavel eloquent",
@@ -205,7 +211,7 @@ export default {
           imagen: "./project4.png",
           titulo: "GGGamers",
           descripcion:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+            "GGGamers es una plataforma web que permite a los usuarios consultar y participar en eventos y torneos, con el objetivo de competir y alcanzar los mejores puestos en la clasificación del local.",
           tecnologias: ["Vue", "Laravel", "GSAP", "MAPBOX", "SWIPER.JS"],
           segundoContenido: [
             "Algoritmo de busqueda",
@@ -248,14 +254,18 @@ export default {
           this.complementHeight = "200px";
           this.cardHeight = "200px";
           this.cardwidth = "300px";
+          this.TittleSize = "35px";
+          this.TextSize = "15px";
         } else {
-          this.MaximoText = "80%";
+          this.MaximoText = "70%";
           this.sectionheightFirst = "30%";
           this.sectionheightSecond = "70%";
           this.complementWidth = ["35%", "27.5%", "20%"];
           this.complementHeight = "90%";
           this.cardHeight = "340px";
           this.cardwidth = "550px";
+          this.TittleSize = "80px";
+          this.TextSize = "30px";
         }
       }
     });
@@ -406,7 +416,6 @@ export default {
 }
 
 .title {
-  font-size: 1.5em;
   font-weight: 900;
   text-align: center;
   margin: 0;

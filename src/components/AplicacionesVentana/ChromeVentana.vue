@@ -2,7 +2,7 @@
   <div class="contenedorDeImagen">
     <img
       :style="{ width: logoWidth, height: logoheight }"
-      src="../../../public/Google_2015_logo.svg.png"
+      src="/Google_2015_logo.svg.png"
       alt=""
     />
   </div>

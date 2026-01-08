@@ -6,7 +6,7 @@
       @click="PrimeraPestana"
     >
       <img
-        src="../../../public/informacion.png"
+        src="/informacion.png"
         :style="{
           width: logoWidth,
           height: logoheight,
@@ -22,7 +22,7 @@
       @click="SegundaPestana"
     >
       <img
-        src="../../../public/navegador-web.png"
+        src="/navegador-web.png"
         :style="{
           width: logoWidth,
           height: logoheight,
@@ -69,21 +69,21 @@
       </div>
       <div class="as2">
         <div class="CajonesIconos">
-          <img src="../../../public/vue.png" alt="" />
+          <img src="/vue.png" alt="" />
           <h4>Vue 3</h4>
         </div>
         <div class="CajonesIconos">
-          <img src="../../../public/vite.png" alt="" />
+          <img src="/vite.png" alt="" />
           <h4>Vite</h4>
         </div>
         <div class="CajonesIconos">
-          <img src="../../../public/gsap.png" alt="" />
+          <img src="/gsap.png" alt="" />
           <h4>GSAP</h4>
         </div>
       </div>
     </div>
     <div class="contenido estilo" v-show="PestanaEstilo" ref="estilo">
-      <img src="../../../public/gifgif.gif" alt="" />
+      <img src="/gifgif.gif" alt="" />
       <h1>En Construccion</h1>
     </div>
   </div>
