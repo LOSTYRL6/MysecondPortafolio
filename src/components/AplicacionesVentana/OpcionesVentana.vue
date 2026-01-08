@@ -42,7 +42,7 @@
         <section class="info-grid">
           <div class="info-item">
             <span class="info-title">Versión:</span>
-            <span class="info-value">1.0.0</span>
+            <span class="info-value">Alpha</span>
           </div>
           <div class="info-item">
             <span class="info-title">Fecha de compilación:</span>

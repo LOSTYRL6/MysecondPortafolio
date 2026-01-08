@@ -1,7 +1,20 @@
-<template>hola</template>
+<template>
+  <iframe
+    src="./pdf/MiCurriculum.pdf"
+    width="100%"
+    height="100%"
+    frameborder="0"
+  ></iframe>
+</template>
 
 <script>
 export default {};
 </script>
 
-<style></style>
+<style>
+.pdf-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+</style>

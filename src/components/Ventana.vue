@@ -4,23 +4,31 @@
     :class="{ maximizado: estaMaximizado }"
     :style="{ top: posY + 'px', left: posX + 'px', zIndex: zIndex }"
     v-show="!minimizado"
+    @mousedown="$emit('click', id)"
   >
-    <div class="BarraTitulo" @mousedown="iniciarDrag">
+    <!-- Barra de título -->
+    <div class="BarraTitulo" @mousedown.stop="iniciarDrag">
       <div class="tituloYfoto">
         <img :src="img" alt="" />
         <p>{{ titulo }}</p>
       </div>
       <div class="Botones">
+        <!-- Minimizar -->
         <button @click="$emit('toggle', id)">
           <img src="/_.png" alt="" />
         </button>
-        <button @click="maximizar"><img src="/🗖.png" alt="" /></button>
+        <!-- Maximizar -->
+        <button @click="maximizarVentana">
+          <img src="/🗖.png" alt="" />
+        </button>
+        <!-- Cerrar -->
         <button @click="$emit('cerrar', id)">
           <img src="/x.png" alt="" />
         </button>
       </div>
     </div>
 
+    <!-- Contenido de la ventana -->
     <div class="Contenido" v-show="!minimizado">
       <slot></slot>
     </div>
@@ -34,49 +42,57 @@ export default {
     id: String,
     minimizado: Boolean,
     img: String,
+    zIndex: Number,
   },
   data() {
     return {
       estaMaximizado: false,
-      prevX: 0,
-      prevY: 0,
       posX: 100,
       posY: 100,
+      prevX: 0,
+      prevY: 0,
       offsetX: 0,
       offsetY: 0,
       arrastrando: false,
-      zIndex: 1,
       raf: null,
     };
   },
   methods: {
-    maximizar() {
+    maximizarVentana() {
       if (!this.estaMaximizado) {
+        // Guardamos posición previa
         this.prevX = this.posX;
         this.prevY = this.posY;
+        // Maximizamos
         this.posX = 0;
         this.posY = 0;
         this.estaMaximizado = true;
       } else {
+        // Restauramos posición
         this.posX = this.prevX;
         this.posY = this.prevY;
         this.estaMaximizado = false;
       }
+      // Avisamos al padre para subir al frente
+      this.$emit("maximize", this.id);
     },
 
     iniciarDrag(e) {
+      if (this.estaMaximizado) return; // no arrastrar maximizado
+
+      // Avisamos al padre que esta ventana debe subir al frente
+      this.$emit("click", this.id);
+
       this.arrastrando = true;
       this.offsetX = e.clientX - this.posX;
       this.offsetY = e.clientY - this.posY;
 
       document.addEventListener("mousemove", this.arrastrar);
       document.addEventListener("mouseup", this.finDrag);
-
-      this.zIndex = Date.now();
     },
 
     arrastrar(e) {
-      if (!this.arrastrando || this.estaMaximizado) return;
+      if (!this.arrastrando) return;
 
       if (!this.raf) {
         this.raf = requestAnimationFrame(() => {
@@ -101,7 +117,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .Ventana {
   position: absolute;

@@ -50,8 +50,11 @@ import Aplicaciones from "./components/Aplicaciones.vue";
               :id="ventana.id"
               :img="ventana.imagenes"
               :minimizado="ventana.minimizado"
+              :zIndex="ventana.zIndex || 100"
               @toggle="toggleVentana"
               @cerrar="cerrarVentana"
+              @click="traerAlFrente"
+              @maximize="maximizarVentana"
             >
               <component :is="ventana.componente" />
             </ventana>
@@ -124,6 +127,7 @@ export default {
       MostrarPantallanegra: false,
       MostrarPantallaPrincipal: false,
       MostrarMenuHotFix: false,
+      zIndexTop: 100,
       hora: "",
       fecha: "",
       AplicacioneExistente: [
@@ -229,6 +233,7 @@ export default {
         }
       );
     },
+
     abrirVentana(app) {
       if (!this.ventanasAbiertas.find((v) => v.id === app.id)) {
         this.ventanasAbiertas.push({
@@ -237,7 +242,13 @@ export default {
         });
       }
     },
+    traerAlFrente(id) {
+      const ventana = this.ventanasAbiertas.find((v) => v.id === id);
+      if (!ventana) return;
 
+      this.zIndexTop += 1; // sube el z-index
+      ventana.zIndex = this.zIndexTop;
+    },
     cerrarVentana(id) {
       this.ventanasAbiertas = this.ventanasAbiertas.filter((v) => v.id !== id);
     },
@@ -247,6 +258,10 @@ export default {
       if (!ventana) return;
 
       ventana.minimizado = !ventana.minimizado;
+      if (!ventana.minimizado) this.traerAlFrente(id); // si lo vuelves a mostrar, lo traes al frente
+    },
+    maximizarVentana(id) {
+      this.traerAlFrente(id);
     },
     actualizarFechaHora() {
       const ahora = new Date();
@@ -359,6 +374,7 @@ export default {
   padding-left: 7px;
 }
 .horario {
+  margin-right: 5px;
   position: absolute;
   right: 0;
   width: 250px;

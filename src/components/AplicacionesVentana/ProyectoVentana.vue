@@ -196,13 +196,13 @@ export default {
           contenidoSecondSection: "Contenido del segundo section",
           cartasFlip: [
             {
-              frontimg: "Card 1",
-              backimg: "Back 1",
+              frontimg: "./drink2.png",
+              backimg: "./drink1.png",
               flipped: false,
             },
             {
-              frontimg: "Card 2",
-              backimg: "Back 2",
+              frontimg: "./drink4.png",
+              backimg: "./drink.gif",
               flipped: false,
             },
           ],

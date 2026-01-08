@@ -52,7 +52,7 @@ export default {
           this.botonFontSize = "12px";
         } else {
           this.logoWidth = "40%";
-          this.logoheight = "150px";
+          this.logoheight = "200px";
           this.botonWidth = "25%";
           this.botonHeight = "25px";
           this.botonFontSize = "14px";
