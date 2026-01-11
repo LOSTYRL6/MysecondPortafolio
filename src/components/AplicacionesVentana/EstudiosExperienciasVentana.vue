@@ -245,7 +245,7 @@ h3 {
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
-  background-color: #9feb9b;
+  background-color: #9be0eb;
   color: rgb(0, 0, 0);
   border-radius: 25px;
   opacity: 0;
@@ -291,7 +291,7 @@ h3 {
 }
 
 .imagne img {
-  width: 50%;
+  width: 70%;
   height: 50%;
   margin: 15px;
 }

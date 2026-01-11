@@ -222,13 +222,13 @@ export default {
           contenidoSecondSection: "Contenido del segundo section",
           cartasFlip: [
             {
-              frontimg: "Card 1",
-              backimg: "Back 1",
+              frontimg: "./gg1.png",
+              backimg: "./gg2.png",
               flipped: false,
             },
             {
-              frontimg: "Card 2",
-              backimg: "Back 2",
+              frontimg: "./gg3.png",
+              backimg: "./gg.gif",
               flipped: false,
             },
           ],

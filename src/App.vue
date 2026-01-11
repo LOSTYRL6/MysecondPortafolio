@@ -21,7 +21,7 @@ import Aplicaciones from "./components/Aplicaciones.vue";
         v-if="IniciarSesion"
       />
       <div class="contenedorDelMenu" v-show="IniciarSesion">
-        <img src="/windowflower.png" alt="" />
+        <img src="/windowflower.png" @click="cerrarMenu" alt="" />
         <p>Guess User</p>
         <button @click="cerrarMenu">Cerrar</button>
       </div>
@@ -46,6 +46,7 @@ import Aplicaciones from "./components/Aplicaciones.vue";
             <ventana
               v-for="ventana in ventanasAbiertas"
               :key="ventana.id"
+              :ref="`ventana-${ventana.id}`"
               :titulo="ventana.Nombre"
               :id="ventana.id"
               :img="ventana.imagenes"
@@ -80,10 +81,18 @@ import Aplicaciones from "./components/Aplicaciones.vue";
           </div>
 
           <div class="horario">
-            <section><img src="/flag.png" alt="" /></section>
-            <section><img src="/internet.png" alt="" /></section>
-            <section><img src="/bateria.png" alt="" /></section>
-            <section><img src="/sonido.png" alt="" /></section>
+            <section @click="NoFuncionaAun">
+              <img src="/flag.png" alt="" />
+            </section>
+            <section @click="NoFuncionaAun">
+              <img src="/internet.png" alt="" />
+            </section>
+            <section @click="NoFuncionaAun">
+              <img src="/bateria.png" alt="" />
+            </section>
+            <section @click="NoFuncionaAun">
+              <img src="/sonido.png" alt="" />
+            </section>
             <div class="HorarioYdate">
               {{ hora }}
               {{ fecha }}
@@ -174,6 +183,9 @@ export default {
   methods: {
     cerrarMenu() {
       const vm = this;
+      const sonido = new Audio("./sound/Windows_Logon_Sound.wav");
+      sonido.volume = 1;
+      sonido.play();
       this.MostrarPantallanegra = true;
       gsap.fromTo(
         ".Pantallanegra",
@@ -206,8 +218,17 @@ export default {
       this.MostrarMenuHotFix = !this.MostrarMenuHotFix;
     },
 
+    NoFuncionaAun() {
+      const sonido = new Audio("./sound/critical.wav");
+      sonido.volume = 0.6;
+      sonido.play();
+    },
+
     ApagarLaPantalla() {
       const vm = this;
+      const sonido = new Audio("./sound/Windows_Shutdown.wav");
+      sonido.volume = 0.6;
+      sonido.play();
       this.MostrarMenuHotFix = !this.MostrarMenuHotFix;
       this.MostrarPantallanegra = true;
       this.MostrarPantallaPrincipal = false;
@@ -250,15 +271,50 @@ export default {
       ventana.zIndex = this.zIndexTop;
     },
     cerrarVentana(id) {
+      const sonido = new Audio("./sound/click.wav");
+      sonido.volume = 1;
+      sonido.play();
       this.ventanasAbiertas = this.ventanasAbiertas.filter((v) => v.id !== id);
     },
 
     toggleVentana(id) {
+      const sonido = new Audio("./sound/Windows_Minimize.wav");
+      sonido.volume = 1;
+      sonido.play();
+
       const ventana = this.ventanasAbiertas.find((v) => v.id === id);
       if (!ventana) return;
 
-      ventana.minimizado = !ventana.minimizado;
-      if (!ventana.minimizado) this.traerAlFrente(id); // si lo vuelves a mostrar, lo traes al frente
+      const el = this.$refs[`ventana-${id}`][0]?.$el;
+      if (!el) return;
+
+      if (!ventana.minimizado) {
+        gsap.to(el, {
+          y: 300,
+          scale: 0.9,
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.in",
+          onComplete: () => {
+            ventana.minimizado = true;
+          },
+        });
+      } else {
+        ventana.minimizado = false;
+        this.traerAlFrente(id);
+
+        gsap.fromTo(
+          el,
+          { y: 300, scale: 0.9, opacity: 0 },
+          {
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            duration: 0.3,
+            ease: "power2.out",
+          }
+        );
+      }
     },
     maximizarVentana(id) {
       this.traerAlFrente(id);
@@ -357,10 +413,10 @@ export default {
   position: relative;
   width: 100%;
   height: 7%;
-  background-color: rgb(49 60 71 / 30%);
+  background-color: rgba(115, 120, 126, 0.715);
   background-image: linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.1333333333) 50px,
+      rgba(0, 0, 0, 0.256) 50px,
       transparent 80px
     ),
     linear-gradient(
@@ -391,11 +447,61 @@ export default {
   align-items: center;
   margin: 5px;
   margin-top: 10px;
+  position: relative; /* para ::after y ::before */
+  cursor: pointer;
 }
+
 .horario section img {
   width: 20px;
   height: 20px;
+  transition: transform 0.3s ease;
 }
+
+/* Hover: icono sube un poquito */
+.horario section:hover img {
+  transform: translateY(-3px);
+}
+
+/* Círculo brillante debajo del icono */
+.horario section::after {
+  content: "";
+  position: absolute;
+  bottom: 5px; /* un poco separado del icono */
+  left: 50%;
+  transform: translateX(-50%) scale(0.5); /* empieza pequeño */
+  width: 5px; /* tamaño del círculo */
+  height: 5px;
+  background: rgba(255, 255, 255, 0.9); /* blanco brillante */
+  border-radius: 50%;
+  box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.7); /* resplandor */
+  opacity: 0;
+  transition: all 0.25s ease;
+}
+
+/* Subrayado horizontal tenue */
+.horario section::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.7); /* línea blanca translúcida */
+  transition: all 0.25s ease;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+/* Hover: mostrar círculo y expandir subrayado */
+.horario section:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1); /* crece un poco al aparecer */
+}
+
+.horario section:hover::before {
+  width: 60%; /* ancho del subrayado */
+}
+
 .HorarioYdate {
   display: flex;
   flex-direction: column;
@@ -407,6 +513,7 @@ export default {
   color: white;
   padding: 5px;
 }
+
 .ContenedorDelAplicaciones {
   display: flex;
   flex-direction: column; /* hace que los hijos se apilen verticalmente */

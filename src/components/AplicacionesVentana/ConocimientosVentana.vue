@@ -431,22 +431,36 @@ export default {
   },
 
   methods: {
+    reproducirClick() {
+      if (!this.sonidoClick) {
+        this.sonidoClick = new Audio("./sound/click.wav");
+        this.sonidoClick.volume = 1;
+      }
+
+      this.sonidoClick.currentTime = 0;
+      this.sonidoClick.play();
+    },
     PrimeraPestana() {
+      this.reproducirClick();
       if (this.PestanaFrontend) return;
       this.animarCambio("info");
     },
 
     SegundaPestana() {
+      this.reproducirClick();
       if (this.PestanaBackend) return;
       this.animarCambio("estilo");
     },
 
     TerceraPestana() {
+      this.reproducirClick();
       if (this.PestanaDB) return;
+
       this.animarCambio("A");
     },
 
     CuartaPestana() {
+      this.reproducirClick();
       if (this.PestanaOther) return;
       this.animarCambio("B");
     },

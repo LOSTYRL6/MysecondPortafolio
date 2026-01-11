@@ -59,6 +59,9 @@ export default {
   },
   methods: {
     maximizarVentana() {
+      const sonido = new Audio("./sound/Windows_Minimize.wav");
+      sonido.volume = 1;
+      sonido.play();
       if (!this.estaMaximizado) {
         // Guardamos posición previa
         this.prevX = this.posX;
