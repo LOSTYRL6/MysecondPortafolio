@@ -15,7 +15,7 @@
       <div class="Botones">
         <!-- Minimizar -->
         <button @click="$emit('toggle', id)">
-          <img src="/_.png" alt="" />
+          <img src="/adios.png" alt="" />
         </button>
         <!-- Maximizar -->
         <button @click="maximizarVentana">

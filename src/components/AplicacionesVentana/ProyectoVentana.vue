@@ -56,7 +56,7 @@
             :style="{ width: complementWidth[2], height: complementHeight }"
           >
             <div class="Github">
-              <a :href="proyecto.github">
+              <a :href="proyecto.github" target="_blank">
                 <img src="/githubviolet.png" alt="" />
                 <h2>{{ proyecto.titulo }}</h2>
               </a>
@@ -140,7 +140,7 @@ export default {
             "Utilizar PHP para conectar al BD",
             "Creacion de juego con Javascripts",
           ],
-          github: "#",
+          github: "https://github.com/jfelixg123/proyecto-cientifiks",
           contenidoSecondSection: "Contenido del segundo section",
           cartasFlip: [
             {
@@ -166,7 +166,7 @@ export default {
             "Utilizacion de cookie y sesion",
             "Utilizar Json para cambiar contenido",
           ],
-          github: "#",
+          github: "https://github.com/LOSTYRL6/EinaDeGestio",
           contenidoSecondSection: "Contenido del segundo section",
           cartasFlip: [
             {
@@ -192,7 +192,7 @@ export default {
             "Utilizacion del Mapbox",
             "Utilizacion del controller para enviar datos",
           ],
-          github: "#",
+          github: "https://github.com/RogerOrti/sing_drink",
           contenidoSecondSection: "Contenido del segundo section",
           cartasFlip: [
             {
@@ -218,7 +218,7 @@ export default {
             "Enviacion de email y contenido con QR",
             "Utilizar Axios para mandar informacion",
           ],
-          github: "#",
+          github: "https://github.com/cep-daw/GGGamers",
           contenidoSecondSection: "Contenido del segundo section",
           cartasFlip: [
             {

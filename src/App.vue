@@ -22,8 +22,7 @@ import Aplicaciones from "./components/Aplicaciones.vue";
       />
       <div class="contenedorDelMenu" v-show="IniciarSesion">
         <img src="/windowflower.png" @click="cerrarMenu" alt="" />
-        <p>Guess User</p>
-        <button @click="cerrarMenu">Cerrar</button>
+        <p>Guess</p>
       </div>
 
       <div
@@ -657,11 +656,18 @@ export default {
 .contenedorDelMenu img {
   width: 150px;
   height: 150px;
+  transition: box-shadow 0.3s ease;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.contenedorDelMenu img:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
 }
 .contenedorDelMenu p {
   margin-top: 20px;
   margin-bottom: 10px;
-  font-size: 20px;
+  font-size: 25px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: white;
 }
