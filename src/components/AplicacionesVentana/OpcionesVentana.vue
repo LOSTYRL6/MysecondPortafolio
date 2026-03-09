@@ -15,22 +15,6 @@
       />
       <h1 v-show="MostrarTitulo">INFORMACION</h1>
     </div>
-
-    <div
-      class="Opciones"
-      :class="{ activa: PestanaEstilo }"
-      @click="SegundaPestana"
-    >
-      <img
-        src="/navegador-web.png"
-        :style="{
-          width: logoWidth,
-          height: logoheight,
-        }"
-        alt=""
-      />
-      <h1 v-show="MostrarTitulo">ESTILO</h1>
-    </div>
   </div>
 
   <div class="OpcionSelecionado" ref="contenedor">
@@ -189,7 +173,7 @@ h3 {
 }
 
 .Opciones {
-  width: 50%;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;

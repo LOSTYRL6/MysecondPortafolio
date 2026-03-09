@@ -1,6 +1,6 @@
 <template>
   <iframe
-    src="./pdf/MiCurriculum.pdf"
+    src="./pdf/Curriculum.pdf"
     width="100%"
     height="100%"
     frameborder="0"
