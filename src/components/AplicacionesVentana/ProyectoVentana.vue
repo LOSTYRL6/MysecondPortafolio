@@ -24,7 +24,7 @@
         >
           {{ proyecto.titulo }}
         </div>
-        <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+        <div class="subtitle" data-swiper-parallax="-200"></div>
         <div
           :style="{ maxWidth: MaximoText, fontSize: TextSize }"
           class="text"
@@ -57,7 +57,18 @@
           >
             <div class="Github">
               <a :href="proyecto.github" target="_blank">
-                <img src="/githubviolet.png" alt="" />
+                <img 
+                  v-if="proyecto.titulo === 'Data Science & AI Suite'" 
+                  src="/streamlit.png" 
+                  alt="Streamlit Web" 
+                />
+                
+                <img 
+                  v-else 
+                  src="/githubviolet.png" 
+                  alt="GitHub Repository" 
+                />
+                
                 <h2>{{ proyecto.titulo }}</h2>
               </a>
             </div>
@@ -229,6 +240,33 @@ export default {
             {
               frontimg: "./gg3.png",
               backimg: "./gg.gif",
+              flipped: false,
+            },
+          ],
+        },
+
+                {
+          imagen: "./project5.png",
+          titulo: "Data Science & AI Suite",
+          descripcion:
+            "Un suite donde puedes elegir 3 opciones, Un recomendador de juego que busca juego parecido al que bsicate, un prediccion estudiantil para probar quien aprueba o suspende y un grafica de consola del mercado al paso del tiempo",
+          tecnologias: ["Python", "Streamlit", "Jupyter notebook", "seaborn", "pandas", "Numpy", "Plotlby"],
+          segundoContenido: [
+            "Modelos Híbridos de Machine Learning (K-Means + KNN)",
+            "Clasificación Predictiva con Random Forest",
+            "Dashboard con Integración de APIs Financieras en Vivo"
+          ],
+          github: "https://github.com/cep-daw/GGGamers",
+          contenidoSecondSection: "Contenido del segundo section",
+          cartasFlip: [
+            {
+              frontimg: "./science1.png",
+              backimg: "./science2.png",
+              flipped: false,
+            },
+            {
+              frontimg: "./science3.png",
+              backimg: "./science.gif",
               flipped: false,
             },
           ],

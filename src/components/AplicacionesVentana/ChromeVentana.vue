@@ -25,7 +25,7 @@ export default {
     return {
       anchoVentana: 0,
       logoheight: "150px",
-      logoWidth: "40%",
+      logoWidth: "60%",
       botonWidth: "25%",
       botonHeight: "25px",
       botonFontSize: "14px",
@@ -48,7 +48,7 @@ export default {
           this.logoWidth = "60%";
           this.logoheight = "100px";
           this.botonWidth = "80%";
-          this.botonHeight = "35px";
+          this.botonHeight = "25px";
           this.botonFontSize = "12px";
         } else {
           this.logoWidth = "40%";
@@ -87,7 +87,8 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 50px;
+  
 }
 
 .gcse-container {

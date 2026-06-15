@@ -26,7 +26,7 @@
         <section class="info-grid">
           <div class="info-item">
             <span class="info-title">Versión:</span>
-            <span class="info-value">Alpha</span>
+            <span class="info-value">Beta V1</span>
           </div>
           <div class="info-item">
             <span class="info-title">Fecha de compilación:</span>

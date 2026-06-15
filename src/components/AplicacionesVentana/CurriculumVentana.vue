@@ -1,6 +1,6 @@
 <template>
   <iframe
-    src="./pdf/Curriculum.pdf"
+    src="./pdf/CurriculumDefinitivo.pdf"
     width="100%"
     height="100%"
     frameborder="0"

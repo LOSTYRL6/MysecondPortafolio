@@ -55,6 +55,21 @@
       />
       <h1 v-show="MostrarTitulo">Other</h1>
     </div>
+
+    <div
+      class="Opciones"
+      :class="{ activa: PestanaDataScience }"
+      @click="QuintaPestana"
+    >
+      <img
+        src="/scienceIcon.png"
+        :style="{ width: logoWidth, height: logoheight }"
+        alt=""
+      />
+      <h1 v-show="MostrarTitulo">Data Science</h1>
+    </div>
+
+    
   </div>
 
   <div class="OpcionSelecionado" ref="contenedor">
@@ -225,6 +240,48 @@
         </swiper-slide>
       </Swiper>
     </div>
+
+
+    <div class="contenido C" v-if="PestanaDataScience" ref="B">
+      <Swiper
+        :effect="'cards'"
+        :grabCursor="true"
+        :modules="modules"
+        :style="{ width: cardWidth, height: cardheight }"
+        class="mySwiper"
+      >
+        <swiper-slide v-for="(card, index) in cartas5" :key="index">
+          <div :style="{ width: cardWidth, height: cardheight }" class="card">
+            <div class="content">
+              <div class="back">
+                <div class="back-content">
+                  <img src="/scienceIcon.png" alt="" />
+                </div>
+              </div>
+              <div class="front">
+                <div class="front-content">
+                  <div class="title">
+                    <img :src="card.imagen" alt="" />
+                  </div>
+                  <div class="description">
+                    <h2 :style="{ fontSize: TituloSize, marginBottom: '5px' }">
+                      {{ card.title }}
+                    </h2>
+                    <p
+                      v-for="(DescripcionUnica, a) in card.description"
+                      :key="a"
+                      :style="{ fontSize: TextSize }"
+                    >
+                      {{ DescripcionUnica }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+      </Swiper>
+    </div>
   </div>
 </template>
 
@@ -249,6 +306,7 @@ export default {
       PestanaBackend: false,
       PestanaDB: false,
       PestanaOther: false,
+      PestanaDataScience: false,
       cardWidth: "300px",
       cardheight: "420px",
       MostrarTitulo: true,
@@ -399,6 +457,79 @@ export default {
           imagen: "./swiper.png",
         },
       ],
+
+      cartas5: [
+        {
+          title: "Python",
+          description: [
+            "- Sintaxis limpia",
+            "- Scripts de automatización",
+            "- Base para Data Science",
+          ],
+          backText: "Hover Me 6",
+          imagen: "./python.png",
+        },
+        {
+          title: "Pandas",
+          description: [
+            "- DataFrames y Series",
+            "- Limpieza de datos (.csv)",
+            "- Manipulación de datasets",
+          ],
+          backText: "Hover Me 7",
+          imagen: "./Pandas.png",
+        },
+        {
+          title: "NumPy",
+          description: [
+            "- Matrices multidimensionales",
+            "- Operaciones matemáticas",
+            "- Computación científica",
+          ],
+          backText: "Hover Me 8",
+          imagen: "./NumPy.png",
+        },
+        {
+          title: "Jupyter Notebook",
+          description: [
+            "- Entorno interactivo",
+            "- Pruebas de código rápidas",
+            "- Documentación de análisis",
+          ],
+          backText: "Hover Me 9",
+          imagen: "./Jupyter.png",
+        },
+        {
+          title: "Seaborn",
+          description: [
+            "- Gráficos estadísticos",
+            "- Mapas de calor (Heatmaps)",
+            "- Estilización de Matplotlib",
+          ],
+          backText: "Hover Me 10",
+          imagen: "./seaborn.png",
+        },
+        {
+          title: "Plotly",
+          description: [
+            "- Gráficos interactivos",
+            "- Renderizado dinámico",
+            "- Integración en Dashboards",
+          ],
+          backText: "Hover Me 11",
+          imagen: "./plotly.png",
+        },
+        {
+          title: "Power BI",
+          description: [
+            "- Modelado de datos",
+            "- Informes interactivos",
+            "- Business Intelligence",
+          ],
+          backText: "Hover Me 12",
+          imagen: "./PowerBi.png",
+        },
+      ]
     };
   },
 
@@ -464,11 +595,18 @@ export default {
       if (this.PestanaOther) return;
       this.animarCambio("B");
     },
+
+    QuintaPestana(){
+      this.reproducirClick();
+      if (this.PestanaDataScience) return;
+      this.animarCambio("C");
+    },
     animarCambio(nueva) {
       let actual = "info";
       if (this.PestanaBackend) actual = "estilo";
       if (this.PestanaDB) actual = "A";
       if (this.PestanaOther) actual = "B";
+      if (this.PestanaDataScience) actual = "C";
 
       const salida = this.$refs[actual];
       const salidaY = -100;
@@ -483,6 +621,7 @@ export default {
           this.PestanaBackend = nueva === "estilo";
           this.PestanaDB = nueva === "A";
           this.PestanaOther = nueva === "B";
+          this.PestanaDataScience = nueva === "C";
 
           await nextTick();
 

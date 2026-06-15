@@ -110,10 +110,29 @@ import Aplicaciones from "./components/Aplicaciones.vue";
               </section>
             </div>
             <div class="buenoEjemplo2">
-              <img src="/windowflower.png" alt="" class="flowerIconos" />
-              <div class="ApagarButton">
-                <button @click="ApagarLaPantalla">Apagar</button>
-                <div>
+              
+              <div class="contenedorIconoWin7" ref="contenedorIcono">
+                <div class="glowEfecto" ref="glow"></div>
+                
+                <img :src="iconoActual" alt="User/App Icon" class="flowerIconos" ref="iconoImg" />
+              </div>
+              
+              <div class="Ejemplo2Contenedor">
+                <section 
+                  class="SecciondelEjemplo2" 
+                  v-for="(AplicacionesUnicas, index2) in AplicacioneExistente"
+                  :key="index2"
+                  @click="abrirVentana(AplicacionesUnicas)"
+                  @mouseenter="cambiarIcono(AplicacionesUnicas)"
+                  @mouseleave="restaurarIcono"
+                >
+                  {{ AplicacionesUnicas.Nombre }}
+                </section>
+              </div>
+
+              <div class="ApagarButton" @click="ApagarLaPantalla">
+                <button>Apagar</button>
+                <div class="flechaApagar">
                   <img src="/play.png" alt="" />
                 </div>
               </div>
@@ -177,6 +196,7 @@ export default {
         },
       ],
       ventanasAbiertas: [],
+      iconoActual: "./windowflower.png"
     };
   },
   methods: {
@@ -331,6 +351,60 @@ export default {
       this.fecha = `${dia}/${mes}/${año}`;
       this.hora = `${horas}:${minutos}`;
     },
+    // 2. Añadimos estos dos métodos para controlar los eventos del ratón
+      cambiarIcono(aplicacion) {
+          const img = this.$refs.iconoImg;
+          const glow = this.$refs.glow;
+
+          // Creamos una línea de tiempo rápida para coordinar todo
+          const tl = gsap.timeline();
+
+          tl.to(img, {
+            opacity: 0,
+            scale: 0.8,
+            y: 5,
+            duration: 0.1,
+            onComplete: () => {
+              // Cambiamos la ruta de la imagen en el punto ciego
+              this.iconoActual = aplicacion.imagenes;
+            }
+          })
+          .to(img, {
+            opacity: 1,
+            scale: 1.05, // Crece un poquito como en Windows 7
+            y: 0,        // Sube a su posición
+            duration: 0.25,
+            ease: "back.out(1.2)" // Le da ese efecto elástico y vivo
+          })
+          // Animamos el destello azul de fondo en paralelo
+          .to(glow, { opacity: 0.6, scale: 1.1, duration: 0.2 }, "<");
+        },
+
+        restaurarIcono() {
+          const img = this.$refs.iconoImg;
+          const glow = this.$refs.glow;
+
+          const tl = gsap.timeline();
+
+          tl.to(img, {
+            opacity: 0,
+            scale: 0.9,
+            duration: 0.1,
+            onComplete: () => {
+              // Volvemos al icono original (la flor)
+              this.iconoActual = "./windowflower.png";
+            }
+          })
+          .to(img, {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.2,
+            ease: "power1.out"
+          })
+          // Apagamos el destello de fondo
+          .to(glow, { opacity: 0, scale: 1, duration: 0.2 }, "<");
+        },
   },
   mounted() {
     setTimeout(() => {
@@ -393,6 +467,36 @@ export default {
   left: 0;
   z-index: 1;
   overflow: hidden;
+}
+.SecciondelEjemplo2{
+  width: 100%;
+  height: 50px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.7); /* Sombra de texto clásica */
+  transition: all 0.1s ease;
+}
+
+.SecciondelEjemplo2:hover {
+  background: linear-gradient(
+    to bottom, 
+    rgba(255, 255, 255, 0.35) 0%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    rgba(255, 255, 255, 0.0) 51%, 
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 .PantallaPrincipalFoto {
   width: 100%;
@@ -595,8 +699,17 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
-  justify-content: end;
   align-items: center;
+}
+.Ejemplo2Contenedor{
+  margin-top: 50px;
+  width: 90%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 40%;
 }
 .flowerIconos {
   position: absolute;
