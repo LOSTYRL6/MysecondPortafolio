@@ -2,6 +2,7 @@
 import HelloWorld from "./components/HelloWorld.vue";
 import { gsap } from "gsap";
 import Aplicaciones from "./components/Aplicaciones.vue";
+
 </script>
 
 <template>
@@ -405,6 +406,20 @@ export default {
           // Apagamos el destello de fondo
           .to(glow, { opacity: 0, scale: 1, duration: 0.2 }, "<");
         },
+
+          precargarImagenes() {
+    // 1. Juntamos todas las rutas de tus apps + la flor por defecto
+          const rutas = [
+            "./windowflower.png",
+            ...this.AplicacioneExistente.map(app => app.imagenes)
+          ];
+
+          // 2. Creamos objetos Image en memoria para forzar la descarga única
+          rutas.forEach(ruta => {
+            const img = new Image();
+            img.src = ruta;
+          });
+        },
   },
   mounted() {
     setTimeout(() => {
@@ -412,6 +427,7 @@ export default {
     }, 7650);
     this.actualizarFechaHora();
     this.timer = setInterval(this.actualizarFechaHora, 1000);
+    this.precargarImagenes();
   },
   beforeUnmount() {
     clearInterval(this.timer);
